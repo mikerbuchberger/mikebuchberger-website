@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Der Nervensystem-Check – Mike Buchberger</title>
+<style>
+  :root {
+    --cream: #F8F7F3;
+    --cream-deep: #F0EEE7;
+    --teal: #1A7A5E;
+    --teal-deep: #14604A;
+    --teal-pale: #E8F5F0;
+    --amber: #9A5B14;
+    --amber-pale: #FBF1E2;
+    --dark: #1C1C1A;
+    --body: #3A3A36;
+    --gray: #84827B;
+    --line: #DEDBD2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--body);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 22px; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 18px; }
+  }
+
+  .breath-line {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--teal); transform-origin: left; transform: scaleX(0);
+    z-index: 100; transition: transform 0.2s ease-out;
+  }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px 0 0; }
+  .topbar strong { font-size: 15px; color: var(--dark); }
+  .topbar a { font-size: 14px; font-weight: 700; color: var(--teal); text-decoration: none; }
+  .topbar a:hover { color: var(--teal-deep); }
+
+  h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.02em; color: var(--dark); line-height: 1.15; margin-bottom: 18px; }
+  h2 { font-size: clamp(24px, 4.5vw, 32px); font-weight: 800; color: var(--dark); letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 20px; }
+  p { font-size: 17px; margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal); color: white; font-weight: 700; font-size: 17px;
+    padding: 16px 34px; border-radius: 100px; text-decoration: none;
+    border: none; cursor: pointer; font-family: inherit;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 24px rgba(26, 122, 94, 0.25);
+  }
+  .btn:hover { background: var(--teal-deep); transform: translateY(-2px); }
+
+  .screen { display: none; padding: 56px 0 72px; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  #intro { text-align: center; padding-top: 72px; }
+  #intro .subline { font-size: 18px; color: var(--gray); max-width: 460px; margin: 0 auto 36px; }
+  #intro .meta { font-size: 14px; color: var(--gray); margin-top: 18px; }
+
+  /* QUIZ */
+  .progress-track { height: 6px; background: var(--cream-deep); border-radius: 100px; margin: 36px 0 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 100px; width: 0%; transition: width 0.3s ease; }
+  .progress-label { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 0.04em; margin-bottom: 40px; }
+
+  .question-text {
+    font-size: clamp(21px, 4vw, 26px); font-weight: 700; color: var(--dark);
+    line-height: 1.4; min-height: 130px; margin-bottom: 36px;
+  }
+
+  .answer-row { display: flex; gap: 14px; }
+  .answer-btn {
+    flex: 1; padding: 20px; font-size: 18px; font-weight: 700;
+    font-family: inherit; cursor: pointer; border-radius: 16px;
+    border: 2px solid var(--line); background: white; color: var(--dark);
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .answer-btn:hover { border-color: var(--teal); background: var(--teal-pale); transform: translateY(-2px); }
+
+  .back-link {
+    display: inline-block; margin-top: 28px; font-size: 14px; color: var(--gray);
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .back-link:hover { color: var(--teal); }
+
+  /* GATE */
+  #gate { text-align: center; padding-top: 72px; }
+  #gate .gate-icon { font-size: 40px; margin-bottom: 20px; }
+  #gate p { color: var(--gray); max-width: 440px; margin: 0 auto 30px; }
+  .gate-form { display: flex; flex-direction: column; gap: 14px; max-width: 400px; margin: 0 auto; }
+  .gate-form input[type="email"] {
+    padding: 16px 20px; font-size: 16px; font-family: inherit;
+    border: 2px solid var(--line); border-radius: 100px; background: white;
+    color: var(--dark); outline: none; text-align: center;
+  }
+  .gate-form input[type="email"]:focus { border-color: var(--teal); }
+  .gate-small { font-size: 12.5px; color: var(--gray); margin-top: 16px; max-width: 380px; margin-left: auto; margin-right: auto; }
+  .gate-error { color: #B23A3A; font-size: 14px; font-weight: 600; display: none; margin-top: 4px; }
+
+  /* RESULT */
+  .result-kicker {
+    display: inline-block; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: white;
+    background: var(--teal); padding: 7px 16px; border-radius: 100px; margin-bottom: 22px;
+  }
+  .tool-box {
+    background: var(--teal-pale); border: 1px solid #C5E5D8; border-radius: 18px;
+    padding: 26px 28px; margin: 30px 0;
+  }
+  .tool-box h4 {
+    font-size: 13px; font-weight: 800; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal-deep); margin-bottom: 12px;
+  }
+  .tool-box p { font-size: 16px; }
+  .tool-box .tool-sub { font-weight: 700; color: var(--dark); }
+
+  /* Zustands-Karten (Achterbahn-Profil) */
+  .state-question {
+    text-align: center; font-size: 17px; font-weight: 700; color: var(--dark);
+    margin: 30px 0 16px;
+  }
+  .state-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 8px; }
+  .state-card { border-radius: 18px; padding: 22px; border: 1px solid var(--line); background: white; }
+  .state-card.up { border-top: 4px solid var(--amber); }
+  .state-card.down { border-top: 4px solid var(--teal); }
+  .state-card h5 {
+    font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .state-card.up h5 { color: var(--amber); }
+  .state-card.down h5 { color: var(--teal-deep); }
+  .state-card .signs { font-size: 13px; color: var(--gray); margin-bottom: 14px; line-height: 1.5; }
+  .state-card .remedy { font-size: 14.5px; color: var(--body); line-height: 1.55; }
+  .state-card .remedy strong { color: var(--dark); }
+  @media (max-width: 480px) { .state-grid { grid-template-columns: 1fr; } }
+
+  /* VIDEO: Wenn dein Ergebnis-Video fertig ist, füge hier pro Profil oder für alle einen Embed ein.
+     Beispiel: <div class="video-wrap"><iframe src="..." allowfullscreen></iframe></div> */
+
+  .bridge {
+    background: var(--dark); border-radius: 24px; padding: 40px 32px;
+    color: var(--cream); margin-top: 44px;
+  }
+  .bridge .eyebrow { color: var(--teal); }
+  .bridge h3 { font-size: clamp(20px, 4vw, 26px); font-weight: 800; color: white; line-height: 1.3; margin-bottom: 16px; }
+  .bridge p { color: #C8C6BC; font-size: 15.5px; }
+  .bridge .price-line { font-size: 15px; font-weight: 700; color: white; margin: 20px 0 24px; }
+  .bridge .btn { background: white; color: var(--dark); box-shadow: none; }
+  .bridge .btn:hover { background: var(--teal-pale); }
+  .bridge .coaching-hint { font-size: 13.5px; color: #9C9A92; margin-top: 22px; }
+  .bridge .coaching-hint a { color: var(--teal); font-weight: 700; text-decoration: none; }
+
+  .restart { text-align: center; margin-top: 40px; }
+  .restart button {
+    background: none; border: none; font-family: inherit; font-size: 14px;
+    color: var(--gray); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  }
+  .restart button:hover { color: var(--teal); }
+
+  footer { text-align: center; padding: 40px 0 48px; font-size: 13px; color: var(--gray); }
+
+  @media (max-width: 480px) {
+    .answer-row { flex-direction: row; }
+    .question-text { min-height: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="breath-line" id="breathLine"></div>
+
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html">← Übersicht</a>
+    <strong>Mike Buchberger</strong>
+  </div>
+</div>
+
+<!-- Statisches Formular für Netlify-Erkennung (nicht sichtbar).
+     SPÄTER: Wenn MailerLite eingerichtet ist, ersetzen wir die submitEmail()-Funktion
+     unten im Script durch das MailerLite-Formular. -->
+<form name="nervensystem-check" netlify netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email">
+  <input type="text" name="profil">
+  <input type="text" name="bot-field">
+</form>
+
+<!-- INTRO -->
+<div class="screen active wrap" id="intro">
+  <div class="eyebrow">Der Nervensystem-Check</div>
+  <h1>Bist du im Überlebensmodus?</h1>
+  <p class="subline">Finde in 3 Minuten heraus, in welchem Zustand dein Nervensystem festhängt – und was ihm jetzt helfen würde.</p>
+  <button class="btn" onclick="startQuiz()">Check starten <span>→</span></button>
+  <p class="meta">12 Fragen · Ja oder Nein · sofortiges Ergebnis</p>
+</div>
+
+<!-- QUIZ -->
+<div class="screen wrap" id="quiz">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">Frage 1 von 12</div>
+  <div class="question-text" id="questionText"></div>
+  <div class="answer-row">
+    <button class="answer-btn" onclick="answer(true)">Ja</button>
+    <button class="answer-btn" onclick="answer(false)">Nein</button>
+  </div>
+  <button class="back-link" id="backBtn" onclick="goBack()" style="visibility:hidden;">← Frage zurück</button>
+</div>
+
+<!-- EMAIL GATE -->
+<div class="screen wrap" id="gate">
+  <div class="gate-icon">✓</div>
+  <h2>Dein Ergebnis ist fertig.</h2>
+  <p>Trag deine E-Mail ein – du siehst dein Ergebnis sofort hier auf der Seite. Per Mail bekommst du außerdem mein Ergebnis-Video mit den nächsten Schritten für deinen Zustand.</p>
+  <div class="gate-form">
+    <input type="email" id="emailInput" placeholder="deine@email.de" autocomplete="email">
+    <div class="gate-error" id="gateError">Bitte gib eine gültige E-Mail-Adresse ein.</div>
+    <button class="btn" style="justify-content:center;" onclick="submitEmail()">Ergebnis anzeigen <span>→</span></button>
+  </div>
+  <p style="margin-top:20px;font-size:14px;color:#3A3A36;background:#E8F5F0;border-radius:10px;padding:12px 16px;max-width:400px;margin-left:auto;margin-right:auto;text-align:center;">🔒 Kein Spam. Du bekommst dein Ergebnis und ab und zu ehrliche Post übers Nervensystem. Abmelden jederzeit mit einem Klick.</p>
+</div>
+
+<!-- RESULT -->
+<div class="screen wrap" id="result">
+  <span class="result-kicker" id="resultKicker">Dein Ergebnis</span>
+  <h2 id="resultHeadline"></h2>
+  <div id="resultBody"></div>
+  <div class="tool-box" id="toolBox"></div>
+
+  <!-- VIDEO-PLATZHALTER: Ergebnis-Video hier einbetten, sobald gedreht -->
+
+  <div class="bridge">
+    <div class="eyebrow">Der nächste Schritt</div>
+    <h3>Der Check zeigt dir, WO du stehst.<br>Jetzt kommt das WIE.</h3>
+    <p>Dein Ergebnis ist eine Momentaufnahme – der Zustand, in dem dein System gerade festhängt. Das Werkzeug oben hilft dir im Moment. Aber dein Nervensystem verändert sich nicht durch ein einzelnes Werkzeug und nicht durch Verstehen allein. Es verändert sich durch viele kleine Beweise, jeden Tag: Ich bin sicher.</p>
+    <p>Genau dafür habe ich den <strong style="color:white;">Nervensystem Guide</strong> gebaut – der komplette Weg von „festgefahren" zu einem flexiblen System, das sich selbst regulieren kann. 6 Module, Workbook, die richtigen Werkzeuge für deinen Zustand.</p>
+    <div class="price-line">37 € · 14 Tage Geld-zurück-Garantie, ohne Fragen</div>
+    <a href="kurs.html" class="btn">Zum Nervensystem Guide <span>→</span></a>
+    <p class="coaching-hint">Du willst nicht alleine gehen? Ich begleite auch 1:1 – wenige Plätze. <a href="coaching.html">Zur Begleitung →</a></p>
+  </div>
+
+  <div class="restart">
+    <button onclick="location.reload()">Check nochmal machen</button>
+  </div>
+</div>
+
+<footer>
+  Der Nervensystem-Check · Mike Buchberger
+</footer>
+
+<script>
+  // Fortschrittsbalken oben (Atem-Linie)
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('breathLine').style.transform = `scaleX(${h > 0 ? Math.min(window.scrollY / h, 1) : 0})`;
+  });
+
+  // ===== FRAGEN =====
+  // typ: A = Daueralarm-Signal, B = Leerer-Akku-Signal, C = Stabilitäts-Signal
+  const questions = [
+    { typ: 'B', text: 'Du wachst morgens müde auf – egal, wie lange du geschlafen hast.' },
+    { typ: 'A', text: 'Abends liegst du im Bett, völlig erledigt – aber dein Kopf hört einfach nicht auf zu rattern.' },
+    { typ: 'C', text: 'Nach einem stressigen Tag kommst du meistens von allein wieder runter – spätestens nach einer Nacht Schlaf bist du wieder bei dir.' },
+    { typ: 'B', text: 'Schon kleine Aufgaben fühlen sich manchmal an wie ein Berg – du schiebst Dinge vor dir her, die eigentlich in fünf Minuten erledigt wären.' },
+    { typ: 'A', text: 'Kleinigkeiten bringen dich aus der Fassung – und hinterher denkst du: So bin ich doch eigentlich nicht.' },
+    { typ: 'B', text: 'Dinge, die dir früher Spaß gemacht haben, fühlen sich irgendwie nach nichts mehr an.' },
+    { typ: 'A', text: 'Dein Körper ist ständig angespannt – Kiefer, Schultern, Nacken – auch wenn gerade gar nichts los ist.' },
+    { typ: 'C', text: 'Du spürst früh, wenn dir etwas zu viel wird – und kannst gegensteuern, bevor es dich umhaut.' },
+    { typ: 'B', text: 'Du sagst Treffen ab, obwohl du dich eigentlich darauf gefreut hattest – der Gedanke an Menschen ist plötzlich zu viel.' },
+    { typ: 'A', text: 'Du bist ständig auf Empfang – Geräusche, Nachrichten, Reize: alles kommt gleichzeitig rein und du kannst es nicht ausblenden.' },
+    { typ: 'B', text: 'Du fühlst dich oft eher leer und taub als gestresst – als würdest du dein Leben durch eine Glasscheibe beobachten.' },
+    { typ: 'A', text: 'Beim Einschlafen oder nachts um 3 Uhr: Gedankenkarussell, To-do-Listen, Gespräche, die du im Kopf nochmal führst.' }
+  ];
+
+  // ===== PROFILE =====
+  const profiles = {
+    daueralarm: {
+      headline: 'Dein System steht auf Daueralarm.',
+      body: [
+        'Dein Nervensystem hängt im Gaspedal fest. Es behandelt deinen Alltag wie eine Dauerbedrohung – deshalb kannst du nicht abschalten, deshalb rattert dein Kopf nachts, deshalb reicht eine Kleinigkeit und du gehst an die Decke.',
+        'Warum macht dein System das? Weil es eine einfache Grundregel hat: <strong>Unbekannt heißt unsicher.</strong> Alles, was es nicht kennt oder nicht kontrollieren kann – neue Situationen, offene Aufgaben, ungeklärte Gespräche – stuft es automatisch als Gefahr ein und fährt die Anspannung hoch. Das ist kein Gedanke, den du wegdenken kannst. Das ist ein körperlicher Zustand. Und genau deshalb hat „positiv denken" bei dir nie funktioniert.',
+        '<strong>Der Weg raus: kleine Beweise sammeln.</strong> Dein System glaubt keinen Argumenten – es glaubt Erfahrungen. Es lernt Sicherheit, indem du kleine Versionen von genau den Dingen tust, vor denen es dich schützen will: das unangenehme Gespräch führen, die Aufgabe anfangen statt sie zu umkreisen, die Pause machen, obwohl sich Pause „gefährlich" anfühlt. Jedes Mal registriert dein Körper: Ich habe es getan – und es ist nichts passiert. Hunderte solcher kleinen Beweise verdrahten dein System neu. Nicht ein großer Durchbruch – viele kleine.'
+      ],
+      tool: '<h4>Dein Sofort-Werkzeug: die 4-6-Atmung</h4><p>Atme <span class="tool-sub">4 Sekunden ein und 6 Sekunden aus</span> – zwei Minuten lang. Die verlängerte Ausatmung aktiviert den Teil deines Nervensystems, der für Beruhigung zuständig ist. Kein Esoterik-Trick, sondern Physiologie: Dein Ausatmen ist der direkte Draht zu deiner Bremse. Mach das heute Abend, bevor der Kopf ins Rattern kommt – nicht erst, wenn er schon drin ist.</p>'
+    },
+    akku: {
+      headline: 'Dein System ist im Sparmodus.',
+      body: [
+        'Dein Nervensystem hat auf Notstrom geschaltet. Nach zu langer Überlastung zieht es den Stecker: Alles wird zäh, Aufgaben werden zu Bergen, Freude fühlt sich nach nichts an, und manchmal beobachtest du dein Leben wie durch eine Glasscheibe. Das ist keine Faulheit – es ist eine uralte Schutzreaktion. Wenn Kämpfen und Flüchten zu lange nichts gebracht haben, fährt dein System runter, um dich zu schützen.',
+        'Das Tückische an diesem Zustand: <strong>Du wartest auf Motivation – aber sie kommt in diesem Zustand nicht von allein.</strong> Motivation folgt der Handlung, nicht umgekehrt. Jede abgeschlossene Aufgabe – egal wie klein – gibt deinem Gehirn einen kleinen Dopamin-Impuls: das Signal „weiter, das lohnt sich". So baut sich Momentum auf. Antrieb ist Chemie, keine Willenskraft. Deshalb fühlst du dich nach dem Anfangen wie ein anderer Mensch – und deshalb ist Anfangen die einzige Stelle, an der du ansetzen musst.',
+        '<strong>Der Weg raus: lächerlich kleine Aufgaben.</strong> Nimm dir Aufgaben vor, die so klein sind, dass dein System keinen Alarm schlägt: nicht „aufräumen", sondern „drei Dinge vom Tisch wegräumen". Nicht „Sport machen", sondern „Schuhe anziehen und vor die Tür gehen". Klein anfangen ist keine Schwäche – es ist die einzige Tür, die aus dem Sparmodus rausführt. Und noch mehr Couch macht es übrigens schwerer, nicht leichter: Dein System braucht sanfte Aktivierung, nicht noch mehr Ruhe.'
+      ],
+      tool: '<h4>Dein Sofort-Werkzeug: Aktivierung vor Entspannung</h4><p><span class="tool-sub">Kaltes Wasser ins Gesicht, dann fünf Minuten zügig um den Block – ohne Handy.</span> Nicht rausdenken, rausbewegen. Erst dem Körper einen Impuls geben, dann kommt der Antrieb von selbst zurück.</p>'
+    },
+    achterbahn: {
+      headline: 'Dein System pendelt zwischen Vollgas und Stillstand.',
+      body: [
+        'Dein Nervensystem kennt gerade nur zwei Gänge: hochtourig oder ausgeschaltet. Tagsüber angespannt, getrieben, alles auf Empfang – und dann der Absturz: leer, zäh, nichts geht mehr. Vielleicht kennst du produktive Wochen, auf die ein Zusammenbruch folgt. Oder Tage, an denen du zwischen Gereiztheit und Erschöpfung hin- und herspringst, ohne zu verstehen, warum.',
+        'Und hier kommt der Punkt, der wahrscheinlich vieles erklärt: <strong>Diese zwei Zustände brauchen entgegengesetzte Werkzeuge.</strong> Im Vollgas-Modus brauchst du etwas, das dich runterbringt. Im Stillstand brauchst du etwas, das dich sanft aktiviert. Wenn du das Falsche zur falschen Zeit machst – dich im Shutdown zur Meditation zwingst oder im Daueralarm noch eine Runde powerst – wird es schlimmer statt besser. Genau deshalb hat bei dir bisher vermutlich kein einzelner Tipp verlässlich funktioniert. Es lag nicht an dir. Es lag am Timing.',
+        '<strong>Der Weg raus beginnt deshalb nicht mit einem Werkzeug, sondern mit einer Frage.</strong> Halte kurz inne und frag dich: In welchem Gang bin ich gerade? Zehn Sekunden reichen. Allein diese Beobachterposition ist schon Training – du lernst, deine Zustände zu erkennen, statt von ihnen gefahren zu werden. Und dann nimmst du das Werkzeug, das zu deiner Richtung passt:'
+      ],
+      tool: '<div class="state-question">„Bin ich gerade auf Vollgas – oder im Stillstand?"</div><div class="state-grid"><div class="state-card up"><h5>Vollgas</h5><div class="signs">Angespannt · getrieben · Kopf laut</div><div class="remedy"><strong>4-6-Atmung:</strong> 4 Sekunden ein, 6 Sekunden aus – zwei Minuten. Die lange Ausatmung ist der direkte Draht zu deiner Bremse.</div></div><div class="state-card down"><h5>Stillstand</h5><div class="signs">Leer · zäh · alles zu viel</div><div class="remedy"><strong>Aktivierung:</strong> Kaltes Wasser ins Gesicht, fünf Minuten zügig um den Block – ohne Handy. Nicht rausdenken, rausbewegen.</div></div></div>',
+      toolPlain: true
+    },
+    stabil: {
+      headline: 'Dein System ist gerade ziemlich stabil.',
+      body: [
+        'Dein Nervensystem zeigt aktuell wenige Alarmsignale – und offenbar kannst du dich nach Belastung selbst wieder einfangen. Das ist eine richtig gute Ausgangslage, und ehrlich gesagt: eher selten.',
+        'Vielleicht kennst du einzelne der Muster aus stressigeren Phasen. Genau dafür lohnt es sich, dein System jetzt zu verstehen – Regulation lernt man am besten, bevor man sie dringend braucht, nicht mittendrin.'
+      ],
+      tool: '<h4>Dein Werkzeug: ein Anker im Alltag</h4><p>Behalte einen festen Anker – z. B. <span class="tool-sub">zwei Minuten 4-6-Atmung am Abend</span> (4 Sekunden ein, 6 Sekunden aus). Nicht weil du es akut brauchst, sondern damit dein System den Weg kennt, wenn es ihn braucht.</p>'
+    }
+  };
+
+  // ===== STATE =====
+  let current = 0;
+  const answers = [];
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0 });
+  }
+
+  function startQuiz() {
+    current = 0;
+    answers.length = 0;
+    renderQuestion();
+    show('quiz');
+  }
+
+  function renderQuestion() {
+    document.getElementById('questionText').textContent = questions[current].text;
+    document.getElementById('progressLabel').textContent = `Frage ${current + 1} von ${questions.length}`;
+    document.getElementById('progressFill').style.width = `${(current / questions.length) * 100}%`;
+    document.getElementById('backBtn').style.visibility = current > 0 ? 'visible' : 'hidden';
+  }
+
+  function answer(isYes) {
+    answers[current] = isYes;
+    if (current < questions.length - 1) {
+      current++;
+      renderQuestion();
+    } else {
+      document.getElementById('progressFill').style.width = '100%';
+      show('gate');
+    }
+  }
+
+  function goBack() {
+    if (current > 0) { current--; renderQuestion(); }
+  }
+
+  // ===== AUSWERTUNG =====
+  function evaluate() {
+    let A = 0, B = 0, C = 0;
+    questions.forEach((q, i) => {
+      if (answers[i]) {
+        if (q.typ === 'A') A++;
+        else if (q.typ === 'B') B++;
+        else C++;
+      }
+    });
+    const load = A + B;
+    if (load <= 3 || (load === 4 && C === 2)) return 'stabil';
+    if ((A >= 3 && B >= 3) || A === B) return 'achterbahn';
+    return A > B ? 'daueralarm' : 'akku';
+  }
+
+  // ===== EMAIL GATE =====
+  // MailerLite Gruppen-IDs je Profil
+  const ML_GROUPS = {
+    daueralarm: '192799744970458893',
+    akku:       '192799761558930485',
+    achterbahn: '192799777217316480',
+    stabil:     '192799794539791886'
+  };
+  const ML_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiYzRlMmZkY2JiOTkyZTliZDYzNGI1MjZkMDU3YjI0ZjZlNzMyOWEzODE2MGUwYzZhNzdkMTgzNjdmMzdmMDE4NmJmZjM4NDFiODkyYzAyODMiLCJpYXQiOjE3ODM4Njg1NzQuNjg5NzcyLCJuYmYiOjE3ODM4Njg1NzQuNjg5Nzc1LCJleHAiOjQ5Mzk1NDIxNzQuNjgyMzUyLCJzdWIiOiIyNTIxMjY0Iiwic2NvcGVzIjpbXX0.oeo1_G0RKOUcCL23AB_7HD2uuv_pC2_ATc8FiY2iipvE3mqgqXJwMAX6wtdKqe2RikUEcsezrNoCWde8WMQM-U2xXrd77QLK3JhD9RkLOC8tiRjV9RCW9mIXbDF1uCq76goQ7W_qtjG2y1w34gHShNCk8pG0AHA6TKQ8VBclYu7Y31WLYblJZNQxciC_7sLd-zEiqxAY4kPCJZ_0z6HD-lCZcBo3GHHbxeG_6Iqv_ONN1b_GmA6-v3srksdN6l8aokD5at-Vzeg4U67LI1-8aX2wqigso_SYbU5WXBCxrJEx3Cpc-gcgCeckAK3RbMRqL8Vqq-gQDHfYd6MfjpLYqhbZ7_edxbKE_bRLI1bn7MT15xA9YelzxkMhmwHlcvRgJatr6dn7JCeV_vSmV_1vnkUMCyTvmRBfjJaUng2KUYCgoj9O4FSO_d3BIrAHCME8mZBswLo2j30vh_IUCOTA3WerwFBp96SZNCirCbtmW5YezTNjOwUWeyo2DLt0doy953XE3XY4NWcB3egL8W3mXCyVuvjFsSS4_3Xm2IzvVZRo5Vla_LGGOaZOMpPDTFsTNwT0ACuEmX7tU0hTlKZD1gKU6XlkjpIAVZEeuRoWEaQcV0pUC3mSzzowGdaMEY7dIjSPDp25AfcFTFS7P2nIjxE9B2YE_qmDx1-DADyobdo';
+
+  async function submitEmail() {
+    const input = document.getElementById('emailInput');
+    const email = input.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('gateError').style.display = valid ? 'none' : 'block';
+    if (!valid) return;
+
+    const profilKey = evaluate();
+    const groupId = ML_GROUPS[profilKey];
+
+    // Ergebnis sofort anzeigen – API läuft im Hintergrund
+    showResult(profilKey);
+
+    // Via Netlify Function (kein CORS-Problem)
+    try {
+      await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, groupId: groupId })
+      });
+    } catch(e) {
+      // Stille Fehlerbehandlung
+    }
+  }
+
+  function showResult(key) {
+    const p = profiles[key];
+    document.getElementById('resultHeadline').textContent = p.headline;
+    document.getElementById('resultBody').innerHTML = p.body.map(t => `<p>${t}</p>`).join('');
+    const box = document.getElementById('toolBox');
+    if (p.toolPlain) {
+      // Achterbahn: Zustands-Karten ohne farbige Umrandung
+      box.className = '';
+      box.innerHTML = p.tool;
+    } else {
+      box.className = 'tool-box';
+      box.innerHTML = p.tool;
+    }
+    show('result');
+  }
+</script>
+
+</body>
+</html>

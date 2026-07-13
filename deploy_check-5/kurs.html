@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nervensystem Guide – Dein Weg zu einem flexiblen Nervensystem</title>
+<style>
+  :root {
+    --cream: #F8F7F3;
+    --cream-deep: #F0EEE7;
+    --teal: #1A7A5E;
+    --teal-deep: #14604A;
+    --teal-pale: #E8F5F0;
+    --amber: #9A5B14;
+    --amber-pale: #FBF1E2;
+    --dark: #1C1C1A;
+    --body: #3A3A36;
+    --gray: #84827B;
+    --line: #DEDBD2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* Breath signature element */
+  .breath-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--teal);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 100;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding-top: 48px;
+    overflow: hidden;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 28px auto 0;
+    border: 4px solid white;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+
+  .hero-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    transform: scale(1.25);
+  }
+
+  .hero-photo-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(20,20,18,0.55), transparent);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin: 36px 0 18px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: var(--teal);
+    display: inline-block;
+  }
+
+  h1 {
+    font-size: clamp(34px, 6vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    line-height: 1.12;
+    margin-bottom: 22px;
+  }
+
+  .subhead {
+    font-size: 19px;
+    color: var(--gray);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal);
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 17px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 24px rgba(26, 122, 94, 0.25);
+  }
+
+  .btn:hover {
+    background: var(--teal-deep);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  section { padding: 76px 0; }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+  }
+
+  h2 {
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  p { font-size: 17px; color: var(--body); margin-bottom: 18px; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 21px;
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* PROBLEM section - two feeling cards */
+  .feel-cards {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .feel-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px 28px;
+  }
+
+  .feel-card p { margin-bottom: 0; font-size: 17px; }
+
+  /* SOLUTION */
+  .solution-block {
+    background: var(--teal-pale);
+    border-radius: 24px;
+    padding: 40px 36px;
+    margin-top: 8px;
+  }
+
+  .solution-block p { color: var(--body); }
+  .solution-block .lead { color: var(--teal-deep); }
+
+  /* MODULES */
+  .module-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 32px;
+  }
+
+  .module-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 22px 24px;
+  }
+
+  /* MINDSHIFT FACT BLOCK */
+  .fact-strip {
+    background: var(--dark);
+    padding: 32px 0;
+    margin-top: 24px;
+  }
+
+  .fact-strip .wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .fact-number {
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .fact-text {
+    font-size: 15px;
+    color: #C8C6BC;
+    line-height: 1.5;
+  }
+
+  .fact-text strong { color: white; }
+
+  .module-icon {
+    font-size: 22px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--teal-pale);
+  }
+
+  .bonus-box {
+    margin-top: 24px;
+    background: var(--amber-pale);
+    border: 1px solid #EBD9B8;
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+
+  .bonus-box-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  .bonus-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bonus-list-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: var(--body);
+  }
+
+  .bonus-check {
+    color: #5A8A2E;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .guarantee-box {
+    margin-top: 20px;
+    background: var(--teal-pale);
+    border: 2px solid var(--teal);
+    border-radius: 24px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .guarantee-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .guarantee-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--teal-deep);
+    margin-bottom: 10px;
+  }
+
+  .guarantee-text {
+    font-size: 15px;
+    color: var(--body);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .module-num {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--teal);
+    background: var(--teal-pale);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .module-text strong {
+    display: block;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .module-text span {
+    font-size: 15px;
+    color: var(--gray);
+  }
+
+  .bonus-row {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--line);
+    font-size: 15px;
+    color: var(--gray);
+  }
+
+  .bonus-row strong { color: var(--body); }
+
+  /* WARUM ICH */
+  .warum-ich {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .warum-ich-photo {
+    width: 100%;
+    aspect-ratio: 5/4;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .warum-ich-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  /* PRICE */
+  .price-block {
+    background: var(--dark);
+    color: var(--cream);
+    border-radius: 28px;
+    padding: 48px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-tag-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+
+  .price-amount {
+    font-size: 64px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+
+  .price-amount span { font-size: 28px; font-weight: 600; color: #9C9A92; }
+
+  .price-includes {
+    text-align: left;
+    max-width: 420px;
+    margin: 32px auto 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .price-includes li {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 16px;
+    color: #D8D6CC;
+  }
+
+  .check-icon {
+    color: var(--teal);
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .price-note {
+    font-size: 15px;
+    color: #9C9A92;
+    max-width: 440px;
+    margin: 0 auto 28px;
+  }
+
+  .price-block .btn {
+    background: white;
+    color: var(--dark);
+    box-shadow: none;
+  }
+  .price-block .btn:hover {
+    background: var(--teal-pale);
+  }
+
+  /* SOCIAL PROOF */
+  .social-proof {
+    text-align: center;
+    padding: 48px 0;
+  }
+
+  .social-proof-number {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--teal);
+    letter-spacing: -0.02em;
+  }
+
+  .social-proof p { color: var(--gray); font-size: 16px; margin-top: 6px; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+  }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+
+  .faq-q {
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .faq-a { font-size: 16px; color: var(--body); }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    text-align: center;
+    padding: 80px 0 64px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px 0 48px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 56px 0; }
+    .solution-block, .price-block { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="breath-line" id="breathLine"></div>
+
+<div style="max-width: 720px; margin: 0 auto; padding: 22px 28px 0; display: flex; justify-content: space-between; align-items: center;">
+  <a href="index.html" style="font-size: 14px; font-weight: 700; color: var(--teal); text-decoration: none;">← Übersicht</a>
+  <strong style="font-size: 15px; color: var(--dark);">Mike Buchberger</strong>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-photo-wrap">
+    <img src="photo-hero.jpg" alt="Mike Buchberger">
+  </div>
+  <div class="wrap">
+    <div style="text-align: center; margin: 36px 0 18px;">
+      <div style="width: 18px; height: 2px; background: var(--teal); margin: 0 auto 10px;"></div>
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal);">Nervensystem Guide — Dein Weg zu einem flexiblen Nervensystem</span>
+      <div style="font-size: 17px; font-weight: 700; color: var(--dark); margin-top: 10px;">Von Erschöpfung zu mehr Energie.</div>
+    </div>
+    <h1 style="text-align: center;">Warum fühlst du dich erschöpft, obwohl du eigentlich alles richtig machst?</h1>
+    <p class="subhead" style="text-align: center; margin: 0 auto 32px;">Dieser Guide zeigt dir, warum dein Körper ständig im Alarmmodus bleibt – und wie er wieder Vertrauen, Energie und Stabilität entwickeln kann. Verstehen allein reicht dabei nicht – erst die Verbindung mit körperlicher Erfahrung macht den Unterschied. Genau hier setzt dieser Kurs an.</p>
+    <div style="text-align: center;">
+      <a href="#preis" class="btn">Jetzt starten – 37&nbsp;€ <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section>
+  <div class="wrap">
+    <h2>Kommt dir das bekannt vor?</h2>
+    <div class="feel-cards">
+      <div class="feel-card">
+        <p>Du willst funktionieren, Ruhe finden, einfach wieder du selbst sein – aber dein Körper macht nicht mit. Egal wie sehr du dich bemühst: die innere Unruhe bleibt, oder die Erschöpfung sitzt so tief, dass selbst einfache Dinge schwerfallen.</p>
+      </div>
+    </div>
+    <p>Das ist keine Frage von mehr Anstrengung. Du willst einfach nur, dass es sich wieder leichter anfühlt – aber dein Nervensystem spielt gerade nicht mit.</p>
+    <div class="bonus-box" style="margin-top: 28px; background: var(--teal-pale); border-color: #C5E5D8;">
+      <div class="bonus-box-label" style="color: var(--teal);">💡 Gut zu wissen</div>
+      <p style="margin-bottom: 0; font-size: 16px;">Das liegt daran, dass dein Nervensystem nicht durch reines Nachdenken lernt. Wissen ist wichtig – aber erst durch wiederholte körperliche Erfahrung wird daraus echte Veränderung. Genau hier setzen die meisten Ratgeber zu kurz an.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- LÖSUNG -->
+<section>
+  <div class="wrap">
+    <h2>Es gibt einen Weg raus.</h2>
+    <p class="lead">Und er führt über Verstehen und Körper gemeinsam.</p>
+    <p>Die meisten Ansätze arbeiten mit dem Kopf – Muster erkennen, reflektieren, einordnen. Das ist wichtig. Aber es reicht nicht, weil dein Nervensystem nicht nur im Kopf sitzt.</p>
+    <div class="solution-block">
+      <p class="lead">Dieser Kurs arbeitet mit deinem ganzen System.</p>
+      <p>Du erfährst, warum dein Körper reagiert wie er reagiert – und bekommst die ersten praktischen Werkzeuge, die du sofort in deinen Alltag integrieren kannst: Atmung, somatische Bewegung, einfache Haltungsarbeit. <strong>Dein Körper schickt viermal mehr Signale zum Gehirn als umgekehrt</strong> – deshalb reicht reines Nachdenken nicht aus.</p>
+      <p>Das ist deine Basis. Dein Fundament, auf dem alles andere aufbaut. Ich nehme dich dabei an die Hand – mit einem Workbook das dir zeigt, wie du das wirklich in deinen Alltag integrierst, statt dir nur noch ein weiteres Tool in die Hand zu drücken.</p>
+    </div>
+    <div class="bonus-box" style="margin-top: 28px; background: var(--teal-pale); border-color: #C5E5D8;">
+      <div class="bonus-box-label" style="color: var(--teal);">⚡ Warum Flexibilität, nicht nur Ruhe?</div>
+      <p style="margin-bottom: 0; font-size: 16px;">Ziel ist nicht, den ganzen Tag entspannt und vorsichtig zu sein. Ziel ist, mehr Kapazität und Energie aufzubauen – bis du irgendwann gar nicht mehr bewusst an dein Nervensystem denken musst, weil es einfach von selbst gut läuft.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<div class="wrap" style="text-align: center; padding: 24px 0;">
+  <a href="#preis" class="btn">Jetzt starten – 37&nbsp;€ <span class="btn-arrow">→</span></a>
+</div>
+
+<!-- MODULE -->
+<section>
+  <div class="wrap">
+    <h2>6 Module, die dich Schritt für Schritt tiefer führen</h2>
+    <div class="module-list">
+      <div class="module-item">
+        <div class="module-icon">🧠</div>
+        <div class="module-text"><strong>Verstehe dein Nervensystem</strong><span>Warum Selbstoptimierung dich erschöpft – und was wirklich hilft</span></div>
+      </div>
+      <div class="module-item">
+        <div class="module-icon">🌬️</div>
+        <div class="module-text"><strong>Atmung im Alltag</strong><span>Dein erstes Werkzeug, das überall funktioniert und sofort wirkt</span></div>
+      </div>
+      <div class="module-item">
+        <div class="module-icon">🧍</div>
+        <div class="module-text"><strong>Körper, Haltung & Bewegung</strong><span>Warum dein Körper viermal lauter spricht als dein Kopf</span></div>
+      </div>
+      <div class="module-item">
+        <div class="module-icon">🔄</div>
+        <div class="module-text"><strong>Alltag, Handeln & kognitive Diffusion</strong><span>Aus alten Mustern aussteigen, auch wenn jede Zelle dagegen ist</span></div>
+      </div>
+      <div class="module-item">
+        <div class="module-icon">🌙</div>
+        <div class="module-text"><strong>Schlaf, Darm & Umfeld</strong><span>Das unsichtbare Fundament, das alles trägt</span></div>
+      </div>
+      <div class="module-item">
+        <div class="module-icon">💭</div>
+        <div class="module-text"><strong>Selbstwert & emotionale Dysregulation</strong><span>Das persönlichste Modul, wo wirklich tief gegraben wird</span></div>
+      </div>
+    </div>
+    <div class="bonus-box">
+      <div class="bonus-box-label">✨ Außerdem enthalten</div>
+      <div class="bonus-list">
+        <div class="bonus-list-item"><span class="bonus-check">✓</span> Begleit-Workbook mit Reflexionsfragen & Übungen</div>
+        <div class="bonus-list-item"><span class="bonus-check">✓</span> 2 geführte Mitmach-Videos (somatische Sequenz & TRE)</div>
+        <div class="bonus-list-item"><span class="bonus-check">✓</span> Bonus-Video „Ein regulierter Tag"</div>
+        <div class="bonus-list-item"><span class="bonus-check">✓</span> Bonus-PDF mit Supplements, Blutwerten & Ressourcen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- WARUM ICH -->
+<section>
+  <div class="wrap">
+    <h2>Warum ich</h2>
+    <div class="warum-ich">
+      <div class="warum-ich-photo">
+        <img src="photo-warum-ich.jpg" alt="Mike Buchberger">
+      </div>
+      <div>
+        <p>Ich war komplett am Ende. Untergewicht, Klinikaufenthalt, das Gefühl permanent gegen mich selbst zu kämpfen.</p>
+        <p>Der Weg zurück führte über Sport, Ernährung, Psychologie, Neurowissenschaften – und irgendwann über das Nervensystem. Da wurde mir klar: das ist das eigentliche Fundament. Ich habe mit Ärzten, Therapeuten, Psychologen und Neurowissenschaftlern gearbeitet, hunderte Bücher gelesen – und aus dem, was wirklich getragen hat, ist mein eigener Weg entstanden.</p>
+        <p>Ich behaupte nicht, alle Antworten zu haben. Aber ich weiß, welche Wege dauerhaft tragen – und genau die teile ich hier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="wrap">
+  <div class="section-divider"></div>
+  <div class="social-proof">
+    <div class="social-proof-number">700+</div>
+    <p>Menschen profitieren bereits von meinen kostenlosen Inhalten zu Nervensystemregulation</p>
+  </div>
+  <div class="section-divider"></div>
+</div>
+
+<!-- PREIS -->
+<section id="preis">
+  <div class="wrap">
+    <div class="price-block">
+      <div class="price-tag-label">Aktueller Launch-Preis</div>
+      <div class="price-amount">37&nbsp;€</div>
+      <ul class="price-includes">
+        <li><span class="check-icon">✓</span> 6 ausführliche Module, über 2 Stunden Videomaterial</li>
+        <li><span class="check-icon">✓</span> 2 geführte Mitmach-Videos (somatische Sequenz & TRE)</li>
+        <li><span class="check-icon">✓</span> Komplettes Begleit-Workbook mit Reflexionsfragen & Übungen</li>
+        <li><span class="check-icon">✓</span> Bonus-Video: Ein regulierter Tag</li>
+        <li><span class="check-icon">✓</span> Bonus-PDF mit Supplements, Blutwerten & Ressourcen</li>
+      </ul>
+      <p class="price-note">Für vergleichbare Tiefe zahlen Menschen oft hunderte oder tausende Euro in 1:1 Coaching. Dieser Preis ist mein Dankeschön an alle, die mich von Anfang an unterstützt haben – und er wird sich deutlich erhöhen, sobald die erste Phase vorbei ist.</p>
+      <span class="btn" style="background: #4A4A46; cursor: default; box-shadow: none;">Kommt in Kürze</span>
+      <p style="font-size: 14px; color: #9C9A92; margin-top: 14px; margin-bottom: 0;">Der Kurs startet in wenigen Wochen. Folge mir auf <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener" style="color: var(--teal); font-weight: 700;">Instagram</a>, um den Launch nicht zu verpassen – oder starte jetzt schon mit der <a href="coaching.html" style="color: var(--teal); font-weight: 700;">1:1-Begleitung</a>.</p>
+    </div>
+
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-title">14 Tage Geld-zurück-Garantie</div>
+      <p class="guarantee-text">Kein Risiko für dich. Wenn der Kurs nicht das Richtige für dich ist, schreib mir einfach innerhalb von 14 Tagen – du bekommst dein Geld zurück, keine Fragen. Ich will, dass du das hier mit voller Sicherheit ausprobierst.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <h2>Häufige Fragen</h2>
+    <div class="faq-item">
+      <div class="faq-q">Was genau lerne ich in diesem Kurs?</div>
+      <div class="faq-a">Du lernst die Grundlagen deines Nervensystems zu verstehen – Schlaf, Atmung, Bewegung, emotionale Muster – und bekommst praktische Werkzeuge für den Alltag. Es ist kein Fitness- oder Biomechanik-Programm – der Fokus liegt auf deinem Nervensystem als Fundament für alles andere.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie viel Zeit muss ich einplanen?</div>
+      <div class="faq-a">Jedes Modul dauert 10–20 Minuten. Ich empfehle dir pro Modul ein paar Tage Zeit zu geben, um das Gelernte wirklich auszuprobieren, statt alles an einem Tag durchzuschauen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Brauche ich Vorwissen?</div>
+      <div class="faq-a">Nein, der Kurs ist für Einsteiger gemacht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Funktioniert das auch, wenn ich schon vieles ausprobiert habe?</div>
+      <div class="faq-a">Gerade dann. Viele die zu mir kommen haben schon einiges versucht. Dieser Kurs gibt dir das nötige Verständnis – aber der Fokus liegt zusätzlich auf der körperlichen Umsetzung, weil genau das meist der fehlende Teil ist.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <a href="#preis" class="btn">Jetzt starten – 37&nbsp;€ <span class="btn-arrow">→</span></a>
+</div>
+
+<!-- COACHING UPSELL -->
+<section style="padding: 64px 0 0;">
+  <div class="wrap">
+    <div style="background: var(--dark); border-radius: 28px; padding: 48px 36px; color: var(--cream);">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px;">Für alle, die mehr wollen</div>
+      <h2 style="color: white; font-size: clamp(22px, 4vw, 30px); margin-bottom: 16px; line-height: 1.25;">Der Kurs gibt dir die Werkzeuge.<br>Im 1:1 bauen wir dein Fundament fertig.</h2>
+      <p style="color: #C8C6BC; font-size: 16px; margin-bottom: 8px;">Vielleicht kennst du das: Du weißt eigentlich, was dir guttun würde – und trotzdem bleibt es im Alltag liegen. Nicht weil du undiszipliniert bist, sondern weil alte Muster stärker sind als gute Vorsätze.</p>
+      <p style="color: #C8C6BC; font-size: 16px; margin-bottom: 24px;">Genau da setzt die 1:1-Begleitung an: Wir schauen, was bei dir konkret feststeckt, und setzen es gemeinsam um – Schritt für Schritt, bis dein Fundament wirklich steht und von alleine trägt. Ich sehe, was du selbst vielleicht noch nicht siehst. Und ich bin dabei, wenn es schwierig wird.</p>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;">
+        <div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: #D8D6CC;">
+          <span style="color: var(--teal); font-weight: 800; flex-shrink: 0;">✓</span> Persönliche Sessions, die auf dich zugeschnitten sind – nicht auf eine Zielgruppe
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: #D8D6CC;">
+          <span style="color: var(--teal); font-weight: 800; flex-shrink: 0;">✓</span> Du bekommst Antworten auf das, was bei dir konkret nicht funktioniert
+        </div>
+        <div style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: #D8D6CC;">
+          <span style="color: var(--teal); font-weight: 800; flex-shrink: 0;">✓</span> Kurskosten werden auf das Coaching angerechnet – du zahlst nicht doppelt
+        </div>
+      </div>
+      <a href="coaching.html" style="display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--dark); font-weight: 700; font-size: 16px; padding: 15px 28px; border-radius: 100px; text-decoration: none;">Zur 1:1-Begleitung →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Nervensystem Guide – Dein Weg zu einem flexiblen Nervensystem · Mike Buchberger
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = Math.min(scrolled / height, 1);
+    document.getElementById('breathLine').style.transform = `scaleX(${progress})`;
+  });
+</script>
+
+</body>
+</html>

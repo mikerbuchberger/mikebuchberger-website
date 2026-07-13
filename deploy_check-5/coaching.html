@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1:1 Nervensystem-Begleitung – Mike Buchberger</title>
+<style>
+  :root {
+    --cream: #F8F7F3;
+    --cream-deep: #F0EEE7;
+    --teal: #1A7A5E;
+    --teal-deep: #14604A;
+    --teal-pale: #E8F5F0;
+    --amber: #9A5B14;
+    --amber-pale: #FBF1E2;
+    --dark: #1C1C1A;
+    --body: #3A3A36;
+    --gray: #84827B;
+    --line: #DEDBD2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* Breath signature element */
+  .breath-line {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--teal);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 100;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0 0;
+  }
+  .topbar strong { font-size: 15px; color: var(--dark); }
+  .topbar a {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--teal);
+    text-decoration: none;
+  }
+  .topbar a:hover { color: var(--teal-deep); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding-top: 20px;
+    overflow: hidden;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 28px auto 0;
+    border: 4px solid white;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+
+  .hero-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    transform: scale(1.25);
+  }
+
+  h1 {
+    font-size: clamp(32px, 6vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    line-height: 1.12;
+    margin-bottom: 22px;
+  }
+
+  .subhead {
+    font-size: 19px;
+    color: var(--gray);
+    max-width: 520px;
+    margin-bottom: 36px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--teal);
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 17px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 24px rgba(26, 122, 94, 0.25);
+  }
+
+  .btn:hover {
+    background: var(--teal-deep);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow { transition: transform 0.2s ease; }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+
+  .hero-secondary {
+    display: block;
+    margin-top: 18px;
+    font-size: 15px;
+    color: var(--gray);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hero-secondary:hover { color: var(--teal); }
+
+  section { padding: 72px 0; }
+
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+  }
+
+  h2 {
+    font-size: clamp(26px, 4vw, 34px);
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  p { font-size: 17px; color: var(--body); margin-bottom: 18px; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 21px;
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* WAVE: verknotet -> ruhige Welle */
+  .wave-band {
+    position: relative;
+    background: var(--cream-deep);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-top: 64px;
+    padding: 10px 0 6px;
+  }
+  .wave-band svg { width: 100%; height: 120px; display: block; }
+  .wave-labels {
+    display: flex;
+    justify-content: space-between;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 28px 12px;
+  }
+  .wave-labels span {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .wave-labels .l { color: var(--amber); }
+  .wave-labels .r { color: var(--teal); }
+
+  /* VON -> ZU */
+  .feel-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 18px;
+  }
+
+  .feel-card-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .feel-card .feel-card-label { color: var(--amber); }
+  .feel-card.goal { background: var(--teal-pale); border-color: #C5E5D8; }
+  .feel-card.goal .feel-card-label { color: var(--teal-deep); }
+
+  .feel-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .feel-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 17px;
+    color: var(--body);
+    line-height: 1.55;
+  }
+  .feel-list .mark { flex-shrink: 0; font-weight: 800; margin-top: 1px; }
+  .feel-card .mark { color: var(--amber); }
+  .feel-card.goal .mark { color: var(--teal); }
+
+  .bonus-box {
+    margin-top: 24px;
+    background: var(--amber-pale);
+    border: 1px solid #EBD9B8;
+    border-radius: 16px;
+    padding: 20px 22px;
+  }
+
+  .bonus-box-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  /* KONKRET */
+  .example-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--teal);
+    border-radius: 16px;
+    padding: 24px 26px;
+    margin-bottom: 16px;
+  }
+  .example-card .tag {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .example-card p { margin-bottom: 0; font-size: 16.5px; }
+  .example-card.mine { border-left-color: var(--amber); }
+  .example-card.mine .tag { color: var(--amber); }
+
+  /* WARUM ICH */
+  .warum-ich {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .warum-ich-photo {
+    width: 100%;
+    aspect-ratio: 5/4;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .warum-ich-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  /* ANGEBOTE */
+  .offer-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px 32px;
+    margin-bottom: 24px;
+  }
+
+  .offer-tag {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .offer-card h3 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .offer-price {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .offer-price span { font-size: 16px; font-weight: 600; color: var(--gray); }
+
+  .offer-desc { font-size: 16px; color: var(--gray); margin: 14px 0 22px; }
+
+  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 28px; }
+  .offer-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 16px;
+    color: var(--body);
+    line-height: 1.55;
+  }
+  .check-icon {
+    color: var(--teal);
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Hauptprogramm im dunklen Stil der Kurs-Preisbox */
+  .offer-card.main {
+    background: var(--dark);
+    border: none;
+    color: var(--cream);
+  }
+  .offer-card.main .offer-tag { color: var(--teal); }
+  .offer-card.main h3 { color: white; }
+  .offer-card.main .offer-price { color: white; }
+  .offer-card.main .offer-price span { color: #9C9A92; }
+  .offer-card.main .offer-desc { color: #9C9A92; }
+  .offer-card.main .offer-list li { color: #D8D6CC; }
+  .offer-card.main .btn { background: white; color: var(--dark); box-shadow: none; }
+  .offer-card.main .btn:hover { background: var(--teal-pale); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .btn-outline:hover { background: var(--teal); color: white; }
+
+  /* PHASEN */
+  .phase-list { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+  .phase-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .phase-num {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--teal);
+    background: var(--teal-pale);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase-text strong {
+    display: block;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .phase-text .phase-weeks {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .phase-text p { font-size: 15.5px; color: var(--body); margin-bottom: 0; }
+
+  /* EHRLICH GESAGT */
+  .honest-grid { display: flex; flex-direction: column; gap: 16px; }
+  .honest-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 26px;
+  }
+  .honest-card h4 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .honest-card p { font-size: 16px; margin-bottom: 0; }
+
+  /* CALL */
+  .call-box {
+    background: var(--teal-pale);
+    border: 2px solid var(--teal);
+    border-radius: 24px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .call-box h2 { margin-bottom: 14px; }
+  .call-box p {
+    font-size: 16px;
+    max-width: 440px;
+    margin: 0 auto 28px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 0 48px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+  footer a { color: var(--teal); font-weight: 700; text-decoration: none; }
+  footer a:hover { color: var(--teal-deep); }
+
+  /* EMBLEM */
+  .emblem-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .emblem-row img {
+    width: 80px;
+    height: auto;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+  .emblem-label {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .emblem-label strong { color: var(--body); }
+
+  /* SOCIAL PROOF */
+  .social-proof {
+    text-align: center;
+    padding: 48px 0 0;
+  }
+  .social-proof-number {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--teal);
+    letter-spacing: -0.02em;
+  }
+  .social-proof p { color: var(--gray); font-size: 16px; margin-top: 6px; margin-bottom: 0; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+  }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-q {
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+  .faq-a { font-size: 16px; color: var(--body); margin-bottom: 0; }
+
+  /* KURS-HINWEIS */
+  .course-hint {
+    background: var(--teal-pale);
+    border: 1px solid #C5E5D8;
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+  .course-hint p { font-size: 16px; color: var(--body); max-width: 460px; margin: 0 auto 22px; }
+  .course-hint .course-price {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--teal-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .course-hint .course-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 52px 0; }
+    .offer-card { padding: 28px 22px; }
+    .call-box { padding: 32px 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="breath-line" id="breathLine"></div>
+
+
+<div style="background: var(--dark);">
+  <div class="wrap">
+    <div class="topbar" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+      <a href="index.html" style="color: var(--cream); font-size: 14px; font-weight: 700; text-decoration: none;">← Übersicht</a>
+      <a href="kurs.html" style="color: var(--teal);">Zum Kurs →</a>
+    </div>
+  </div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-photo-wrap" style="border-color: rgba(255,255,255,0.15);">
+      <img src="photo-hero.jpg" alt="Mike Buchberger">
+    </div>
+    <div class="wrap">
+      <div style="text-align: center; margin: 36px 0 18px;">
+        <div style="width: 18px; height: 2px; background: var(--teal); margin: 0 auto 10px;"></div>
+        <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal);">1:1 Nervensystem-Begleitung</span>
+      </div>
+      <h1 style="text-align: center; color: var(--cream);">Du musst da nicht alleine durch.</h1>
+      <p class="subhead" style="text-align: center; margin: 0 auto 32px; color: #9C9A92;">Ständig erschöpft, überreizt, nie wirklich abschalten – und alles, was du alleine versucht hast, hat nichts verändert. Genau dafür gibt es diese Begleitung: 1:1, über den Körper, in deinem Tempo.</p>
+      <div style="text-align: center; padding-bottom: 56px;">
+        <a href="#gespraech" class="btn">Kostenloses Kennenlerngespräch <span class="btn-arrow">→</span></a>
+        <a href="#angebot" class="hero-secondary" style="color: #9C9A92;">So läuft die Begleitung ab ↓</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WELLE: verknotet -> ruhig -->
+<div class="wave-band" aria-hidden="true">
+  <svg viewBox="0 0 1000 140" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#9A5B14"/>
+        <stop offset="55%" stop-color="#5E7A45"/>
+        <stop offset="100%" stop-color="#1A7A5E"/>
+      </linearGradient>
+    </defs>
+    <path id="waveline" fill="none" stroke="url(#waveGrad)" stroke-width="2.2" stroke-linecap="round"
+      d="M 25,72
+         C 60,18 120,22 96,66
+         C 78,104 42,98 66,58
+         C 88,20 148,26 124,70
+         C 104,108 68,100 92,58
+         C 116,22 172,30 150,72
+         C 132,106 100,94 128,62
+         C 152,28 205,36 196,76
+         C 190,104 158,96 180,68
+         C 205,42 258,46 252,80
+         C 247,103 222,95 240,70
+         C 268,44 306,94 344,72
+         C 378,53 410,90 448,71
+         C 483,54 518,54 553,69
+         C 588,84 623,84 658,69
+         C 693,54 728,54 763,69
+         C 798,84 833,84 868,69
+         C 903,54 938,56 1000,66"/>
+  </svg>
+  <div class="wave-labels">
+    <span class="l">Dysreguliert</span>
+    <span class="r">Flexibel</span>
+  </div>
+</div>
+
+<!-- VON -> ZU -->
+<section>
+  <div class="wrap">
+    <h2>Wo du gerade stehst – und wo wir hinwollen.</h2>
+
+    <div class="feel-card">
+      <div class="feel-card-label">Vielleicht kennst du das</div>
+      <ul class="feel-list">
+        <li><span class="mark">–</span> Du schleppst dich müde durch den Tag – und abends, wenn endlich Ruhe wäre, kannst du nicht abschalten.</li>
+        <li><span class="mark">–</span> Andere scheinen ihr Leben einfach so zu wuppen. Bei dir reicht ein ganz normaler Tag – und du bist komplett leer.</li>
+        <li><span class="mark">–</span> Kleinigkeiten bringen dich aus der Fassung – und hinterher denkst du: So bin ich doch eigentlich nicht.</li>
+        <li><span class="mark">–</span> Abends dann doch wieder Handy, Wein oder Kühlschrank – dabei hattest du dir fest vorgenommen, dass es heute anders läuft.</li>
+        <li><span class="mark">–</span> Als hättest du das Steuer nicht mehr selbst in der Hand – irgendwas in dir entscheidet, und du schaust zu.</li>
+        <li><span class="mark">–</span> Du bist für alle da und hältst alles am Laufen. Nur du selbst kommst nicht mehr vor.</li>
+        <li><span class="mark">–</span> Bücher, Podcasts, vielleicht sogar Therapie – und trotzdem sitzt du in denselben Mustern fest.</li>
+      </ul>
+    </div>
+
+    <div class="feel-card goal">
+      <div class="feel-card-label">Und da wollen wir hin</div>
+      <ul class="feel-list">
+        <li><span class="mark">✓</span> Energie für die Dinge, die dir wichtig sind – nicht nur fürs Durchhalten.</li>
+        <li><span class="mark">✓</span> Dein Körper kann wieder runterfahren: echte Pausen, echter Schlaf, echtes Abschalten.</li>
+        <li><span class="mark">✓</span> Wenn es stressig wird, gehst du nicht mehr unter – du merkst früh, was passiert, und weißt, was dir hilft.</li>
+        <li><span class="mark">✓</span> Du verstehst endlich, warum bisher nichts funktioniert hat – und spürst, dass sich diesmal wirklich etwas verändert.</li>
+        <li><span class="mark">✓</span> Dein Alltag passt zu dir – nicht du zu einem Alltag, der dich auffrisst.</li>
+      </ul>
+    </div>
+
+    <div class="bonus-box" style="background: var(--teal-pale); border-color: #C5E5D8;">
+      <div class="bonus-box-label" style="color: var(--teal);">💡 Warum bisher nichts funktioniert hat</div>
+      <p style="margin-bottom: 0; font-size: 16px;">Dein Körper lernt nicht durch Nachdenken. Du kannst dein Problem noch so gut verstehen – solange dein Körper nicht erlebt, dass du sicher bist, ändert sich nichts. Genau deshalb arbeiten wir zusammen über den Körper, nicht nur über Gespräche.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- KONKRET -->
+<section>
+  <div class="wrap">
+    <h2>So sieht das konkret aus.</h2>
+
+    <div class="example-card mine">
+      <span class="tag">Aus meinem Alltag</span>
+      <p>Wenn ich merke, dass ich innerlich einfriere – alles fühlt sich zäh an, ich schiebe alles vor mir her – dann weiß ich heute: Ich muss zuerst in den Körper, nicht in den Kopf. Kaltes Wasser ins Gesicht, ein kurzer Spaziergang. Nicht rausdenken – rausbewegen.</p>
+    </div>
+
+    <div class="example-card">
+      <span class="tag">So kann das bei dir aussehen</span>
+      <p>Sonntagabend, und die Anspannung für die kommende Woche sitzt dir jetzt schon im Bauch? Du lernst, deinem Körper genau in dem Moment ein Gefühl von Sicherheit zu geben – bevor das Gedankenkarussell übernimmt.</p>
+    </div>
+
+    <div class="example-card">
+      <span class="tag">So kann das bei dir aussehen</span>
+      <p>Ein Tag, an dem alle etwas von dir wollten – und abends ist einfach nichts mehr übrig? Du bekommst Werkzeuge, mit denen du zwischendurch auftankst, statt bis zum Umfallen durchzuziehen.</p>
+    </div>
+
+    <p class="lead" style="margin-top: 28px;">Das Ziel ist nicht, dass du nie wieder gestresst bist. Das Ziel ist, dass du dich selbst wieder steuern kannst – und dir ein Leben baust, das dich nicht ständig überfordert.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- WARUM ICH -->
+<section>
+  <div class="wrap">
+    <h2>Warum ich das mache</h2>
+    <div class="warum-ich">
+      <div class="warum-ich-photo">
+        <img src="photo-warum-ich.jpg" alt="Mike Buchberger">
+      </div>
+      <div>
+        <p>Ich hab früh gemerkt, dass mir das normale Gesundheitssystem nicht wirklich helfen kann. Ich hab Therapien ausprobiert, war bei vielen Ärzten – wirklich geholfen hat mir davon keiner. Antidepressiva haben es bei mir am Ende nur schlimmer gemacht.</p>
+        <p>Also hab ich mich selbst auf die Suche gemacht. Bücher, Psychologen, Neurowissenschaftler, somatische Lehrer, Yoga, Meditation – sogar ein Zen-Meister war dabei. Und mir ist etwas aufgefallen: Fast jeder konnte mir irgendetwas mitgeben, das richtig gut getan hat. Und alles, was gut getan hat, hatte eine Gemeinsamkeit – das Nervensystem. Es ist das Fundament. Alles andere baut erst darauf auf.</p>
+        <p>Ich hab über die Jahre zusammengetragen, was mir von all dem am meisten geholfen hat. Genau das gebe ich heute weiter – auch, weil dieses Wissen nicht selbstverständlich ist. Nicht jeder kann für Retreats um die halbe Welt fliegen.</p>
+        <p>Und ganz ehrlich: Ich mach das auch für mich. Ich hab eine echte Leidenschaft für diese Themen entwickelt – und ich kann mir nichts Besseres vorstellen, als mir damit mein eigenes Leben aufzubauen und gleichzeitig Menschen zu helfen, die da stehen, wo ich damals stand.</p>
+
+        <div class="emblem-row">
+          <img src="Holosomatic_Breathwork__therapist_black.png" alt="Holosomatic Breathwork Therapist – zertifiziert durch InnerCamp">
+          <div class="emblem-label"><strong>Zertifizierter Holosomatic Breathwork® Facilitator</strong><br>Level 1 + 2 · InnerCamp · CPD Certified</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-proof">
+      <div class="social-proof-number">700+</div>
+      <p>Menschen profitieren bereits von meinen kostenlosen Inhalten zu Nervensystemregulation</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- WERKZEUGKASTEN -->
+<section>
+  <div class="wrap">
+    <h2>Dein Körper lebt nicht in Schubladen.<br>Meine Begleitung auch nicht.</h2>
+    <p>Das Nervensystem ist das Fundament – aber es hängt mit allem zusammen: wie du schläfst, wie du isst, wie du sitzt, wie du dich bewegst, wofür du morgens aufstehst. Deshalb fließt in die Begleitung ein, was dein System gerade braucht:</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 26px;">
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Atmung & somatische Arbeit</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Haltung, Faszien & Triggerpunkte</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Kraft & Bewegung – optional</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Ernährung & Nährstoff-Basics</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Schlaf & Routinen</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Beziehungen & Alltag</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Gedanken & innere Muster</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Innere-Kind- & Schattenarbeit</span>
+      <span style="background: white; border: 1px solid var(--line); border-radius: 100px; padding: 9px 18px; font-size: 14.5px; font-weight: 600; color: var(--body);">Sinn & Lebensausrichtung</span>
+    </div>
+    <p class="lead">Nichts davon ist Pflicht. Dein Nervensystem gibt das Tempo vor – ich bringe den Werkzeugkasten mit.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<!-- ANGEBOT -->
+<section id="angebot">
+  <div class="wrap">
+    <h2>Zwei Wege, mit mir zu arbeiten.</h2>
+    <p style="margin-top: -12px; margin-bottom: 32px; color: var(--gray); font-size: 16px;">Ich begleite nur wenige Menschen gleichzeitig – damit jede Begleitung die Tiefe hat, die sie braucht.</p>
+
+    <div class="offer-card">
+      <div class="offer-tag">Einstieg · in sich abgeschlossen</div>
+      <h3>Die ersten Durchbrüche</h3>
+      <p style="font-size:13px; color:var(--teal); font-weight:700; margin: 8px 0 0; letter-spacing:0.04em;">Wir sammeln echte Erfahrungen – nicht nur Theorie</p>
+      <div class="offer-price">360 € <span>· 3 Sessions in 4 Wochen</span></div>
+      <p class="offer-desc">Nach vier Wochen hast du ein echtes Ergebnis in der Hand. Ob du danach weitergehst, entscheidest du.</p>
+      <ul class="offer-list">
+        <li><span class="check-icon">✓</span> Du weißt endlich, was bei dir eigentlich los ist – und warum du so erschöpft bist.</li>
+        <li><span class="check-icon">✓</span> Du erkennst dein persönliches Muster: die unbewusste Regel, wann du dich okay fühlst – und wann nicht.</li>
+        <li><span class="check-icon">✓</span> Du hast 2–3 Werkzeuge, die nachweislich bei dir funktionieren – gemeinsam getestet, nicht aus einem Buch.</li>
+        <li><span class="check-icon">✓</span> Zwischen den Sessions bin ich per WhatsApp für dich da.</li>
+      </ul>
+      <a href="#gespraech" class="btn-outline">Mit „Die ersten Durchbrüche" starten <span class="btn-arrow">→</span></a>
+    </div>
+
+    <div class="offer-card main">
+      <div class="offer-tag">Hauptprogramm · 12 Sessions</div>
+      <h3>Flexibles Nervensystem</h3>
+      <div class="offer-price">1.400 € <span>· 3 Phasen · in deinem Tempo</span></div>
+      <p class="offer-desc">Die vollständige Begleitung – von den ersten spürbaren Veränderungen bis zu einem Fundament, das dich trägt. Wie schnell wir durch die Phasen gehen, bestimmt dein System, nicht der Kalender.</p>
+      <ul class="offer-list">
+        <li><span class="check-icon">✓</span> 12 persönliche 1:1 Sessions, aufgebaut in drei Phasen</li>
+        <li><span class="check-icon">✓</span> Wir gehen in deinem Tempo – Schritt für Schritt, nicht mit der Brechstange</li>
+        <li><span class="check-icon">✓</span> Du merkst schon nach den ersten Sessions: etwas hat sich wirklich verändert</li>
+        <li><span class="check-icon">✓</span> Hast du „Die ersten Durchbrüche" schon gemacht, wird es voll angerechnet</li>
+      </ul>
+      <a href="#gespraech" class="btn">Kostenloses Erstgespräch <span class="btn-arrow">→</span></a>
+    </div>
+
+    <div class="phase-list">
+      <div class="phase-item">
+        <div class="phase-num">1</div>
+        <div class="phase-text">
+          <span class="phase-weeks">Phase 1</span>
+          <strong>Dein erster Durchbruch</strong>
+          <p>Wir schauen uns zuerst gemeinsam an, was bei dir eigentlich los ist – und dein Körper bekommt zum ersten Mal seit Langem wieder das Gefühl: Ich bin sicher. Du lernst die ersten Handgriffe, die dich beruhigen, wenn alles zu viel wird. Damit du wieder steuern kannst, statt nur auszuhalten.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">2</div>
+        <div class="phase-text">
+          <span class="phase-weeks">Phase 2</span>
+          <strong>Tiefer rein</strong>
+          <p>Jetzt gehen wir gemeinsam an die Situationen, die dich bisher überfordert haben – in kleinen Schritten, die dein Körper verkraften kann. Ich bin dabei. So sammelst du Beweis für Beweis: Ich schaffe das. Und genau so verändert sich dein System – nicht durchs Verstehen, sondern durchs Erleben.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-num">3</div>
+        <div class="phase-text">
+          <span class="phase-weeks">Phase 3</span>
+          <strong>Dein neues Normal</strong>
+          <p>Zum Schluss bauen wir alles fest in dein Leben ein: deine Frühwarnzeichen, dein Plan für schwere Tage, deine Routinen. Am Ende kannst du dich selbst regulieren – du bist nicht mehr auf jemanden angewiesen. Und wenn du danach weitergehen willst, bauen wir auf genau diesem Fundament auf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GESPRÄCH -->
+<section id="gespraech">
+  <div class="wrap">
+    <div class="call-box">
+      <h2>15 Minuten. Kein Verkaufsgespräch.</h2>
+      <p>Wir telefonieren kurz, du erzählst mir, wo du gerade stehst – und ich sage dir ehrlich, ob ich dir helfen kann. Und wenn nicht, sage ich dir auch das.</p>
+      <a href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener" class="btn">Kennenlerngespräch buchen <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <h2>Häufige Fragen</h2>
+    <div class="faq-item">
+      <div class="faq-q">Ist das wie Therapie?</div>
+      <div class="faq-a">Nein. Therapie ist etwas anderes – und das ist auch gut so. Diese Begleitung arbeitet über den Körper: du lernst dein Nervensystem zu verstehen und bekommst konkrete Werkzeuge für deinen Alltag. Akute Traumata, schwere psychische Erkrankungen oder psychiatrische Krisen sind nicht der richtige Rahmen dafür – da braucht es professionelle therapeutische Unterstützung. Für alles andere – Erschöpfung, Überreizung, alte Muster, das Gefühl nie wirklich abschalten zu können – ist genau das mein Bereich.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Arbeitest du auch mit Süchten?</div>
+      <div class="faq-a">Kommt darauf an, welche. Kiffen, Handy, Gaming, Essen aus Frust oder Langeweile – solche Muster sind meistens Versuche, ein überfordertes System zu beruhigen. Genau damit arbeite ich, auch weil ich selbst jahrelang drinsteckte. Körperliche Abhängigkeiten wie Alkohol sind etwas anderes – da braucht es medizinische Begleitung, und das sage ich dir im Erstgespräch auch offen.</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie viel Zeit muss ich einplanen?</div>
+      <div class="faq-a">Eine Session dauert 60 Minuten, alle ein bis zwei Wochen. Dazwischen bin ich per WhatsApp erreichbar, wenn etwas auftaucht. Die eigentliche Arbeit passiert im Alltag – mit kleinen Dingen, die du in deinen Tag einbaust. Du brauchst keine Stunde am Stück, sondern Regelmäßigkeit in kleinen Schritten.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was, wenn ich schon vieles ausprobiert habe?</div>
+      <div class="faq-a">Gerade dann. Viele, die zu mir kommen, haben schon Therapie gemacht, Bücher gelesen, Kurse besucht – und trotzdem hat sich nichts wirklich verändert. Das liegt meistens nicht daran, dass etwas mit dir nicht stimmt. Es liegt daran, dass der körperliche Teil gefehlt hat. Dein Nervensystem lernt nicht durch Verstehen – es lernt durch Erfahrung. Genau da setzen wir an.</div>
+    </div>
+  </div>
+</section>
+
+<!-- KURS-HINWEIS -->
+<section>
+  <div class="wrap">
+    <div class="course-hint">
+      <span class="course-price">37 €</span>
+      <span class="course-label">Nervensystem Guide · Digitaler Kurs</span>
+      <p>Noch nicht sicher, ob die 1:1-Begleitung das Richtige für dich ist? Starte mit dem Kurs – 6 Module, die dir zeigen, warum dein Nervensystem so reagiert wie es reagiert, und was du sofort dagegen tun kannst.</p>
+      <a href="kurs.html" class="btn">Zum Kurs →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  1:1 Nervensystem-Begleitung · Mike Buchberger
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = Math.min(scrolled / height, 1);
+    document.getElementById('breathLine').style.transform = `scaleX(${progress})`;
+  });
+
+  // Welle zeichnet sich beim Laden einmal von links nach rechts
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const path = document.getElementById('waveline');
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.getBoundingClientRect();
+    path.style.transition = 'stroke-dashoffset 2.2s ease-out';
+    requestAnimationFrame(() => { path.style.strokeDashoffset = '0'; });
+  })();
+</script>
+
+</body>
+</html>
