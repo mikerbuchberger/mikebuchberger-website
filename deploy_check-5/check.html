@@ -307,8 +307,9 @@
       body: [
         'Dein Nervensystem hat auf Notstrom geschaltet. Irgendwann war einfach zu viel – und dein System hat den Stecker gezogen, um dich zu schützen. Seitdem läuft alles auf Sparflamme: Aufgaben werden zu Bergen, Freude fühlt sich weit weg an, und selbst kleine Dinge kosten mehr Energie als sie sollten.',
         'Das ist keine Faulheit. Das ist Biologie. <strong>Im Sparmodus wartest du auf das Gefühl, Lust zu haben – aber genau dieses Gefühl kommt hier nicht zuerst.</strong> Antrieb entsteht durch Handlung, nicht umgekehrt. Sobald du etwas abschließt, egal wie klein, bekommt dein Gehirn einen kleinen Dopamin-Schub: „Das hat funktioniert. Weiter." So baut sich Momentum auf.',
-        '<strong>Der Weg raus: Die Aufgaben müssen so klein sein, dass dein System nicht gleich wieder in den Alarm geht.</strong> Nicht „aufräumen" – sondern drei Dinge vom Tisch wegräumen. Nicht „Sport" – sondern Schuhe anziehen und vor die Tür gehen. Klein anfangen ist keine Schwäche, es ist die einzige Tür die aus dem Sparmodus rausführt.'
+        '<strong>Der Trick: Die Aufgaben müssen so klein sein, dass dein System nicht gleich wieder Alarm schlägt.</strong>'
       ],
+      toolExtra: '<div style="background:#F0EEE7;border-radius:14px;padding:22px 24px;margin-bottom:20px;"><p style="font-size:13px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#84827B;margin:0 0 14px;">Statt groß denken – klein starten</p><p style="font-size:15px;color:#3A3A36;margin:0 0 8px;"><s style="color:#84827B;">Ich räume heute auf</s> &nbsp;→&nbsp; <strong>Drei Dinge vom Tisch wegräumen</strong></p><p style="font-size:15px;color:#3A3A36;margin:0 0 8px;"><s style="color:#84827B;">Ich mache Sport</s> &nbsp;→&nbsp; <strong>Schuhe anziehen und vor die Tür gehen</strong></p><p style="font-size:15px;color:#3A3A36;margin:0;"><s style="color:#84827B;">Ich arbeite produktiv</s> &nbsp;→&nbsp; <strong>Einen einzigen Tab öffnen</strong></p></div>',
       tool: '<h4>Dein Sofort-Werkzeug für heute</h4><p><span class="tool-sub">Aktivierung vor Entspannung:</span> Kaltes Wasser ins Gesicht, dann fünf Minuten zügig um den Block – ohne Handy. Nicht rausdenken, rausbewegen. Erst dem Körper einen Impuls geben, dann kommt der Antrieb von selbst zurück.</p>'
     },
     achterbahn: {
@@ -438,9 +439,11 @@
     document.getElementById('resultBody').innerHTML = p.body.map(t => `<p>${t}</p>`).join('');
     const box = document.getElementById('toolBox');
     if (p.toolPlain) {
-      // Achterbahn: Zustands-Karten ohne farbige Umrandung
       box.className = '';
       box.innerHTML = p.tool;
+    } else if (p.toolExtra) {
+      box.className = '';
+      box.innerHTML = p.toolExtra + '<div class="tool-box">' + p.tool + '</div>';
     } else {
       box.className = 'tool-box';
       box.innerHTML = p.tool;
