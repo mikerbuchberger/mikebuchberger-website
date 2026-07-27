@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atemreise – Mike Buchberger</title>
+<style>
+  :root {
+    --cream: #F8F7F3;
+    --cream-deep: #F0EEE7;
+    --teal: #1A7A5E;
+    --teal-deep: #14604A;
+    --teal-pale: #E8F5F0;
+    --amber: #9A5B14;
+    --amber-pale: #FBF1E2;
+    --dark: #1C1C1A;
+    --body: #3A3A36;
+    --gray: #84827B;
+    --line: #DEDBD2;
+    --navy: #1E2A38;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--body);
+    line-height: 1.65;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+
+  .breath-line {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--teal); transform-origin: left; transform: scaleX(0);
+    z-index: 100; transition: transform 0.2s ease-out;
+  }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px 0 0; }
+  .topbar a { font-size: 14px; font-weight: 700; color: var(--teal); text-decoration: none; }
+  .topbar strong { font-size: 15px; color: var(--dark); }
+
+  h1 { font-size: clamp(30px, 6vw, 44px); font-weight: 800; letter-spacing: -0.02em; color: var(--dark); line-height: 1.15; }
+  h2 { font-size: clamp(24px, 4.5vw, 30px); font-weight: 800; color: var(--dark); letter-spacing: -0.01em; line-height: 1.25; margin-bottom: 20px; }
+  h3 { font-size: 19px; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+  p { font-size: 16.5px; color: var(--body); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal); color: white; font-weight: 700; font-size: 16px;
+    padding: 15px 30px; border-radius: 100px; text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 24px rgba(26, 122, 94, 0.25);
+  }
+  .btn:hover { background: var(--teal-deep); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--dark); font-weight: 700; font-size: 15px;
+    padding: 13px 26px; border-radius: 100px; text-decoration: none;
+    border: 2px solid var(--line); transition: border-color 0.2s ease;
+  }
+  .btn-outline:hover { border-color: var(--teal); }
+
+  .hero-photo-wrap {
+    width: 100%; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden;
+    background: var(--cream-deep); margin: 28px 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px dashed var(--line);
+  }
+  .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-placeholder { color: var(--gray); font-size: 13px; text-align: center; padding: 20px; }
+
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .pain-card {
+    background: white; border: 1px solid var(--line); border-radius: 16px;
+    padding: 22px 20px;
+  }
+  .pain-card .icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .pain-card p { font-size: 14.5px; color: var(--body); margin: 0; line-height: 1.5; }
+  @media (max-width: 560px) { .pain-grid { grid-template-columns: 1fr; } }
+
+  .story-photo {
+    width: 100%; aspect-ratio: 3/2; border-radius: 20px; overflow: hidden;
+    background: var(--cream-deep); margin: 24px 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px dashed var(--line);
+  }
+  .story-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  .benefit-grid { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .benefit-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: white; border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 20px;
+  }
+  .benefit-item .emoji {
+    font-size: 26px; flex-shrink: 0; width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--teal-pale); border-radius: 12px;
+  }
+  .benefit-item p { font-size: 15.5px; margin: 0; line-height: 1.5; }
+  .benefit-item strong { color: var(--dark); }
+
+  .science-box {
+    background: var(--navy); border-radius: 20px; padding: 28px 26px; margin-top: 28px;
+  }
+  .science-box .sci-label {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #7FA8C9; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .science-box p { color: #C5D0DA; font-size: 14.5px; margin: 0; line-height: 1.65; }
+
+  .offer-card {
+    background: white; border: 1px solid var(--line); border-radius: 24px;
+    padding: 36px 32px; margin-bottom: 24px;
+  }
+  .offer-tag {
+    display: inline-block; font-size: 12px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .tag-group { background: var(--teal-pale); color: var(--teal-deep); }
+  .tag-single { background: var(--amber-pale); color: var(--amber); }
+  .offer-price { font-size: 30px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .offer-price span { font-size: 15px; font-weight: 600; color: var(--gray); }
+  .offer-desc { font-size: 16px; color: var(--body); margin-bottom: 20px; }
+  .offer-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .offer-list li { font-size: 14.5px; color: var(--body); display: flex; gap: 8px; }
+  .offer-list .mark { color: var(--teal); font-weight: 800; flex-shrink: 0; }
+
+  .type-pill-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .type-pill { background: var(--cream-deep); border-radius: 12px; padding: 14px 16px; }
+  .type-pill .type-name { font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 3px; }
+  .type-pill .type-desc { font-size: 13.5px; color: var(--gray); }
+
+  .faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-q { font-weight: 700; font-size: 16px; color: var(--dark); margin-bottom: 8px; }
+  .faq-a { font-size: 15px; color: var(--body); margin: 0; }
+
+  .contra-box {
+    background: var(--amber-pale); border: 1px solid #EBD9B8; border-radius: 18px;
+    padding: 26px 26px;
+  }
+  .contra-box .contra-label {
+    font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .contra-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .contra-list li { font-size: 14.5px; color: var(--body); display: flex; gap: 10px; line-height: 1.5; }
+  .contra-list .mark { color: var(--amber); flex-shrink: 0; }
+  .contra-box .contra-note { font-size: 13.5px; color: var(--gray); margin-top: 16px; }
+
+  .cert-box {
+    background: var(--teal-pale); border: 1px solid #C5E5D8; border-radius: 18px;
+    padding: 24px 26px; display: flex; align-items: center; gap: 18px;
+  }
+  .cert-box img { width: 56px; height: 56px; flex-shrink: 0; }
+  .cert-box p { margin: 0; font-size: 15px; color: var(--body); }
+  .cert-box strong { color: var(--dark); }
+
+  .section-divider { height: 1px; background: var(--line); margin: 0; }
+
+  footer { text-align: center; padding: 40px 0 48px; font-size: 13px; color: var(--gray); }
+  footer a { color: var(--gray); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    section { padding: 44px 0; }
+    .offer-card { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="breath-line" id="breathLine"></div>
+
+<div class="wrap">
+  <div class="topbar">
+    <a href="index.html">← Übersicht</a>
+    <strong>Mike Buchberger</strong>
+  </div>
+</div>
+
+<section style="padding-top:36px;">
+  <div class="wrap">
+    <div style="background:var(--teal-pale); border:1px solid #C5E5D8; border-radius:16px; padding:16px 20px; margin-bottom:24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <div>
+        <div style="font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--teal-deep); margin-bottom:3px;">🗓️ Nervensystem Reset · Online-Gruppe</div>
+        <div style="font-size:14px; color:var(--body);">Nächster Termin folgt in der Story · 19–25 €</div>
+      </div>
+      <a href="#interesse" style="font-size:14px; font-weight:700; color:var(--teal); text-decoration:none; white-space:nowrap;">Interesse anmelden →</a>
+    </div>
+
+    <div class="eyebrow">Atemreise</div>
+    <h1>Dein Nervensystem kennt den Weg zurück. Du musst ihm nur wieder zuhören.</h1>
+    <p style="font-size:18px; margin-top:20px; color:var(--body);">Manchmal reicht Reden nicht mehr. Manchmal braucht dein Körper einen anderen Weg, um loszulassen, was du zu lange festgehalten hast. Genau dafür ist Breathwork da.</p>
+
+    <div class="hero-photo-wrap">
+      <img src="breathwork_photos/hero_maske.jpg" alt="Mike bei einer Atemsession">
+    </div>
+
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="#angebote" class="btn">Zu den Angeboten <span>→</span></a>
+      <a href="#geschichte" class="btn-outline">Meine Geschichte</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section style="padding-top:40px; padding-bottom:40px;">
+  <div class="wrap">
+    <h2 style="margin-bottom:16px;">Vielleicht kennst du das</h2>
+    <p style="font-size:16.5px; color:var(--gray); margin-bottom:0;">Du hast schon viel verstanden über dich selbst – verändert hat sich trotzdem wenig. Reden allein reicht nicht mehr, die Antwort sitzt tiefer als im Kopf. Du trägst Anspannung mit dir rum, die du nicht mal richtig benennen kannst – und sehnst dich nach einem Moment, in dem du wirklich loslassen kannst.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section id="geschichte">
+  <div class="wrap">
+    <div class="eyebrow">Warum ich das mache</div>
+    <h2>Meine Geschichte mit Breathwork</h2>
+
+    <p>Angefangen hat's bei mir mit Wim Hof – wie bei den meisten. Irgendwann hab ich mir so ein YouTube-Video angeschaut und geführte Atmung ausprobiert. Hat sich gut angefühlt im Körper. Aber wirklich einordnen konnte ich's noch nicht.</p>
+
+    <p>Der eigentliche Wendepunkt kam dann in Mexiko. Ich wollte mir alternative und östliche Medizin mal aus der Nähe anschauen – und ehrlich gesagt auch die ganzen spirituellen Themen, auf die ich da getroffen bin. Wenn Menschen seit Tausenden von Jahren, in völlig unterschiedlichen Kulturen, davon erzählen wie krass sich dadurch was verändert – dann wollt ich einfach selbst rausfinden, ob da was dran ist.</p>
+
+    <p>Da hab ich zum ersten Mal Holotropes Atmen gemacht. Was da passiert ist, kann ich schwer in Worte fassen. Jahre an Anspannung, Angst, Zweifel – Sachen, die selbst nach viel Therapie nie ganz weg waren – haben sich einfach gelöst. Wie ein Schalter, der umgelegt wurde. Ich hab mich verbunden gefühlt. Mit mir selbst, mit der Natur, mit den Menschen um mich rum – mit irgendwas Größerem, keine Ahnung wie man's nennen soll.</p>
+
+    <div class="story-photo">
+      <img src="breathwork_photos/gruppe_kreis1.jpg" alt="Mike leitet eine Atemsession">
+    </div>
+
+    <p>Ehrlich gesagt: Als ich wieder zu Hause in meinem Alltag war und weniger geatmet hab, sind einige der alten Themen zurückgekommen. Ich bin nicht komplett geheilt. Ich hab immer noch meine Themen, ab und zu auch depressive Phasen. Aber das Atmen hilft mir immer wieder zurück auf die Beine.</p>
+
+    <p>Zurück in Deutschland bin ich dann zu einem Event von InnerCamp gegangen. Am nächsten Tag stand meine Entscheidung: Ausbildung machen. Zwei Wochen später saß ich im Flieger nach Malaga.</p>
+
+    <p><strong style="color:var(--dark);">Seitdem bin ich zertifizierter Holosomatic Breathwork Therapeut – und ich geb genau das weiter, was mir selbst am meisten geholfen hat.</strong></p>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section>
+  <div class="wrap">
+    <h2>Was Breathwork mit dir machen kann</h2>
+    <div class="benefit-grid">
+      <div class="benefit-item">
+        <span class="emoji">🔓</span>
+        <p><strong>Zugang zu deinem Unterbewusstsein</strong> – dahin, wo Verstand und Kontrolle im Alltag normalerweise den Weg versperren.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">🌊</span>
+        <p><strong>Emotionale Blockaden lösen</strong>, die sich mit reinem Reden und Verstehen oft einfach nicht bewegen.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">🕰️</span>
+        <p><strong>Altes verarbeiten</strong> – Bilder, Erinnerungen und Gefühle aus der Vergangenheit dürfen hochkommen und dann auch wirklich gehen.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">🪞</span>
+        <p><strong>Glaubenssätze sichtbar machen</strong>, die dich unbewusst seit Jahren steuern.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">🔥</span>
+        <p><strong>Dein Körper darf rauslassen</strong>, was er die ganze Zeit festgehalten hat – zittern, schreien, weinen, alles darf sein.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">🤝</span>
+        <p><strong>Echte Verbindung spüren</strong> – zu dir selbst, zu deinem Körper, zu dem was gerade wirklich da ist.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="emoji">✨</span>
+        <p><strong>Ein Zustand von Klarheit und Verbindung</strong>, der oft noch Tage nachwirkt.</p>
+      </div>
+    </div>
+
+    <div class="science-box">
+      <div class="sci-label">🔬 Was dabei im Körper passiert</div>
+      <p style="margin-bottom:14px;">Bewusste, verbundene Atmung verändert das Verhältnis von Sauerstoff und Kohlendioxid in deinem Blut – und beeinflusst darüber direkt dein autonomes Nervensystem. Nach der Polyvagal-Theorie (Porges) hat dein Nervensystem verschiedene Zustände: Kampf-oder-Flucht, Shutdown, und einen Zustand von sozialer Sicherheit und Verbindung. Bewusste Atemarbeit kann helfen, gezielt zwischen diesen Zuständen zu wechseln.</p>
+      <p style="margin-bottom:14px;">Studien zeigen außerdem, dass intensives Atmen die Aktivität im sogenannten Default Mode Network verlangsamt – dem Hirnnetzwerk, das für Grübeln, Selbstkritik und das ständige Gedankenkarussell zuständig ist. Wenn dieses Netzwerk leiser wird, entsteht Raum: für Klarheit, für Zugang zu Dingen, die sonst im Hintergrund laufen.</p>
+      <p>Gleichzeitig verschiebt sich deine Gehirnwellenaktivität hin zu Alpha- und Theta-Wellen – Zustände, die auch bei Meditation auftreten und mit Entspannung, Intuition und einem Gefühl tiefer Verbundenheit in Verbindung gebracht werden.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section id="angebote">
+  <div class="wrap">
+    <h2>Zwei Wege, mit mir zu atmen.</h2>
+
+    <div class="offer-card">
+      <span class="offer-tag tag-group">Online-Gruppe · alle 2 Wochen</span>
+      <h3>Nervensystem Reset</h3>
+      <div class="offer-price">19 € <span>· ca. 90 Minuten</span></div>
+      <p class="offer-desc">Gemeinsam in der Gruppe, online. Jede Session hat ihr eigenes Thema – mal geht's um inneres Kind, mal ums Rauslassen von Emotionen, mal einfach nur darum, nach einer stressigen Woche zur Ruhe zu kommen. Wir aktivieren sanft, nie zu tief – und finden dann bewusst zurück in die Ruhe. Das Thema kündige ich vorher immer in der Story an. Auch online entsteht in der Gruppe oft eine Nähe, die man nicht erwarten würde.</p>
+
+      <div class="story-photo" style="margin: 0 0 20px;">
+        <img src="breathwork_photos/gruppe_kreis3.jpg" alt="Gruppe bei der Atemsession">
+      </div>
+
+      <div style="background:var(--cream-deep); border-radius:12px; padding:16px 18px; margin-bottom:20px;">
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--gray); margin-bottom:8px;">Das brauchst du für zuhause</p>
+        <p style="font-size:14.5px; color:var(--body); margin:0;">Augenmaske · Kopfhörer · eine Decke · und wenn du magst einen persönlichen Gegenstand, der dir Sicherheit gibt</p>
+      </div>
+
+      <ul class="offer-list">
+        <li><span class="mark">✓</span> Ankommen & kurzer Austausch in der Gruppe</li>
+        <li><span class="mark">✓</span> Eine Reflexionsfrage zum Reinspüren</li>
+        <li><span class="mark">✓</span> Sanfte Aktivierung durch Bewegung</li>
+        <li><span class="mark">✓</span> Beruhigende Atemtechnik fürs Nervensystem</li>
+        <li><span class="mark">✓</span> Stille Integration & Raum zum Teilen danach</li>
+      </ul>
+      <a href="#interesse" class="btn">Interesse anmelden <span>→</span></a>
+    </div>
+
+    <div class="offer-card">
+      <span class="offer-tag tag-single">1:1 · Persönliche Session</span>
+      <h3>Holotropes Atmen</h3>
+      <div class="offer-price">ca. 300 € <span>· ca. 90 Minuten</span></div>
+      <p class="offer-desc">Die tiefe Reise, ganz auf dich zugeschnitten. Im Vorgespräch schauen wir gemeinsam, welche Richtung für dich gerade dran ist:</p>
+
+      <div class="type-pill-wrap">
+        <div class="type-pill">
+          <div class="type-name">Trauma Healing</div>
+          <div class="type-desc">Emotionale Verarbeitung & Trauma-Release – Altes darf raus und gehen.</div>
+        </div>
+        <div class="type-pill">
+          <div class="type-name">Vitality</div>
+          <div class="type-desc">Für dein Immunsystem und dein Nervensystem – Energie und Performance.</div>
+        </div>
+        <div class="type-pill">
+          <div class="type-name">Innere Reise</div>
+          <div class="type-desc">Der psychedelische Stil – tiefe Einsichten, Blockaden lösen, Zugang zum Unterbewusstsein.</div>
+        </div>
+      </div>
+
+      <ul class="offer-list">
+        <li><span class="mark">✓</span> Vorgespräch, damit ich weiß wo du stehst</li>
+        <li><span class="mark">✓</span> Individuell abgestimmte Musik & Führung</li>
+        <li><span class="mark">✓</span> Volle Aktivierung – Raum für alles, was kommen will</li>
+        <li><span class="mark">✓</span> Zeit zum Nachspüren & Einordnen danach</li>
+      </ul>
+      <a href="#interesse" class="btn">Interesse anmelden <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section>
+  <div class="wrap">
+    <h2>Was du erwarten kannst</h2>
+    <div class="faq-item">
+      <div class="faq-q">Was passiert körperlich während der Session?</div>
+      <p class="faq-a">Ganz unterschiedlich – und das ist normal. Manche zittern, manche weinen, manche werden richtig laut. Andere spüren Kribbeln, Wärme oder ein Ziehen im Brustkorb. Manchmal fühlen sich Hände oder Füße kurzzeitig taub oder wie gelähmt an – das ist eine bekannte, ungefährliche Reaktion, die nach spätestens 10–15 Minuten von selbst wieder vergeht. Es gibt kein Richtig oder Falsch – dein Körper macht genau das, was er gerade braucht.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Und wenn ich einfach gar nichts spüre?</div>
+      <p class="faq-a">Auch das ist völlig okay. Manche Menschen erleben eine Session eher ruhig und körperlich – ohne große emotionale Welle. Das heißt nicht, dass "nichts passiert ist". Manchmal kommt die Verarbeitung erst später, in den Tagen danach, oder durch Träume.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Muss ich Erfahrung mit Atemtechniken haben?</div>
+      <p class="faq-a">Nein. Ich leite dich durch die ganze Session, du musst nichts vorher können oder wissen.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was, wenn ich Angst vor Kontrollverlust habe?</div>
+      <p class="faq-a">Das ist ein völlig normales Gefühl, gerade beim ersten Mal. Du bestimmst jederzeit dein eigenes Tempo – du kannst die Atmung jederzeit verlangsamen oder pausieren.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie fühl ich mich danach?</div>
+      <p class="faq-a">Viele beschreiben ein Gefühl von Leichtigkeit, Klarheit oder Erschöpfung – manchmal auch beides. Plan dir danach nach Möglichkeit etwas Ruhe ein.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section>
+  <div class="wrap">
+    <div class="contra-box">
+      <div class="contra-label">⚠️ Wichtig vorab: Sicherheit & Kontraindikationen</div>
+      <p style="font-size:15px; color:var(--body); margin-bottom:18px;">Intensive Atemtechniken haben eine starke Wirkung auf Körper und Psyche – deshalb sind sie nicht für jeden geeignet. Bitte lies dir das in Ruhe durch.</p>
+
+      <p style="font-size:14px; font-weight:800; color:var(--dark); margin-bottom:10px;">Bitte nicht teilnehmen ohne vorherige ärztliche Absprache bei:</p>
+      <ul class="contra-list" style="margin-bottom:20px;">
+        <li><span class="mark">•</span> Schwangerschaft</li>
+        <li><span class="mark">•</span> Schweren Herz-Kreislauf-Erkrankungen oder nach Herzinfarkt, unbehandeltem Bluthochdruck</li>
+        <li><span class="mark">•</span> Epilepsie oder früheren Schlaganfällen</li>
+        <li><span class="mark">•</span> Psychose, Schizophrenie oder bipolarer Störung (diagnostiziert)</li>
+        <li><span class="mark">•</span> Glaukom oder Netzhautablösung</li>
+        <li><span class="mark">•</span> Aneurysma oder familiärer Vorbelastung dafür</li>
+        <li><span class="mark">•</span> Osteoporose, kürzlichen Operationen oder schweren Knochen-/Gelenkproblemen</li>
+        <li><span class="mark">•</span> Einnahme von Blutverdünnern</li>
+        <li><span class="mark">•</span> Akuten Infektionen</li>
+      </ul>
+
+      <p style="font-size:14px; font-weight:800; color:var(--dark); margin-bottom:10px;">Bitte vorher kurz mit mir sprechen bei:</p>
+      <ul class="contra-list" style="margin-bottom:20px;">
+        <li><span class="mark">•</span> Depression, Angststörung oder anderen psychischen Erkrankungen (auch wenn aktuell in Behandlung)</li>
+        <li><span class="mark">•</span> Stationärem Aufenthalt wegen psychischer Krise in den letzten 10 Jahren</li>
+        <li><span class="mark">•</span> Schwerem PTBS</li>
+        <li><span class="mark">•</span> Asthma – bitte Inhalator zur Session mitbringen</li>
+        <li><span class="mark">•</span> Diabetes oder Unterzuckerungsneigung</li>
+        <li><span class="mark">•</span> Neurodivergenz (ADHS, Autismus u. Ä.) – meist unproblematisch, aber gut zu wissen vorab</li>
+      </ul>
+
+      <p style="font-size:14px; font-weight:800; color:var(--dark); margin-bottom:10px;">Direkt vor der Session:</p>
+      <ul class="contra-list">
+        <li><span class="mark">•</span> Keine Session innerhalb 24h nach Alkohol, Drogen oder psychedelischen Substanzen</li>
+        <li><span class="mark">•</span> Keine Session nach längerem Fasten (über 24h) – dein Kreislauf braucht Energie</li>
+      </ul>
+
+      <p class="contra-note">Diese Liste ersetzt kein ärztliches Gespräch. Bist du unsicher, sprich vorher mit deinem Arzt oder deiner Ärztin ab, ob Breathwork für dich geeignet ist – oder schreib mir einfach, dann klären wir es gemeinsam.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section>
+  <div class="wrap">
+    <div class="cert-box">
+      <img src="Holosomatic_Breathwork__therapist_black.png" alt="Holosomatic Breathwork Zertifikat">
+      <p><strong>Zertifizierter Holosomatic Breathwork Therapeut</strong><br>Ausgebildet bei InnerCamp, Malaga.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="section-divider"></div></div>
+
+<section id="interesse" style="text-align:center;">
+  <div class="wrap">
+    <h2>Bereit, wieder zuzuhören?</h2>
+    <p style="margin-bottom:28px;">Schreib mir einfach – ob Gruppen-Reset oder 1:1, ich meld mich mit den nächsten Terminen bei dir.</p>
+    <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener" class="btn">Auf Instagram schreiben <span>→</span></a>
+  </div>
+</section>
+
+<footer>
+  Atemreise · Mike Buchberger<br><br>
+  <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('breathLine').style.transform = `scaleX(${h > 0 ? Math.min(window.scrollY / h, 1) : 0})`;
+  });
+</script>
+
+</body>
+</html>
