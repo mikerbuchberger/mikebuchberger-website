@@ -165,13 +165,21 @@
   .contra-list .mark { color: var(--amber); flex-shrink: 0; }
   .contra-box .contra-note { font-size: 13.5px; color: var(--gray); margin-top: 16px; }
 
-  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .gallery-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
   .gallery-grid img {
-    width: 100%; height: 220px; object-fit: cover; border-radius: 16px;
+    width: 100%; height: auto; border-radius: 16px;
     display: block;
   }
-  .gallery-note { font-size: 13.5px; color: var(--gray); margin-top: 16px; }
-  @media (max-width: 480px) { .gallery-grid img { height: 160px; } }
+
+  .cert-section { text-align: center; }
+  .cert-badge-big { width: 130px; height: auto; margin: 0 auto 20px; display: block; }
+  .cert-section h3 { font-size: 20px; margin-bottom: 6px; }
+  .cert-section .cert-sub { font-size: 15px; color: var(--gray); margin-bottom: 28px; }
+  .diploma-img {
+    width: 100%; max-width: 420px; border-radius: 16px; margin: 0 auto;
+    display: block; box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    border: 1px solid var(--line);
+  }
 
   .cert-box {
     background: var(--teal-pale); border: 1px solid #C5E5D8; border-radius: 18px;
@@ -446,21 +454,22 @@
   <div class="wrap">
     <h2>Impressionen</h2>
     <div class="gallery-grid">
-      <img src="breathwork_photos/legs_fixed.jpg" alt="Atemsession im Retreat">
-      <img src="breathwork_photos/group_dynamic.jpg" alt="Atemsession im Retreat">
+      <img src="breathwork_photos/legs_fixed.jpg" alt="Atemsession">
+      <img src="breathwork_photos/group_dynamic.jpg" alt="Atemsession">
+      <img src="breathwork_photos/gallery_fan.jpg" alt="Atemsession">
+      <img src="breathwork_photos/gallery_cards.jpg" alt="Atemsession Vorbereitung">
     </div>
-    <p class="gallery-note">Diese Bilder stammen von Sessions vor Ort, nicht vom Online-Format – geben dir aber eine Idee von der Atmosphäre, in der ich arbeite.</p>
   </div>
 </section>
 
 <div class="wrap"><div class="section-divider"></div></div>
 
 <section>
-  <div class="wrap">
-    <div class="cert-box">
-      <img src="Holosomatic_Breathwork__therapist_black.png" alt="Holosomatic Breathwork Zertifikat">
-      <p><strong>Zertifizierter Holosomatic Breathwork Therapeut</strong><br>Ausgebildet bei InnerCamp, Malaga.</p>
-    </div>
+  <div class="wrap cert-section">
+    <img class="cert-badge-big" src="Holosomatic_Breathwork__therapist_black.png" alt="Holosomatic Breathwork Therapist">
+    <h3>Zertifizierter Holosomatic Breathwork Therapeut</h3>
+    <p class="cert-sub">Ausgebildet bei InnerCamp, Malaga · Level 1+2 · Zertifikat-Nr. BW0371</p>
+    <img class="diploma-img" src="breathwork_photos/diploma.jpg" alt="Diplom Holosomatic Breathwork Facilitator">
   </div>
 </section>
 
