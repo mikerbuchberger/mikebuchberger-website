@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meine Geschichte – Mike Buchberger</title>
+<meta name="description" content="Vom Rich Kid in die Klinik und zurück ins Leben: die Geschichte von Mike Buchberger.">
+<style>
+  :root { --cream:#F8F7F3; --cream-deep:#F0EEE7; --teal:#1A7A5E; --teal-deep:#14604A; --teal-pale:#E8F5F0; --amber:#9A5B14; --amber-pale:#FBF1E2; --dark:#1C1C1A; --body:#3A3A36; --gray:#84827B; --line:#DEDBD2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif; background:var(--cream); color:var(--body); line-height:1.6; }
+  .wrap { max-width:640px; margin:0 auto; padding:0 24px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:22px 0 0; font-size:14px; }
+  .topbar a { font-weight:700; color:var(--teal); text-decoration:none; }
+  .hero { text-align:center; padding:44px 0 40px; }
+  .photo { width:132px; height:132px; border-radius:50%; overflow:hidden; margin:0 auto 18px; border:4px solid #fff; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+  .photo img { width:100%; height:100%; object-fit:cover; object-position:center 28%; transform:scale(1.25); }
+  .name { font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); margin-bottom:14px; }
+  h1 { font-size:34px; line-height:1.15; font-weight:800; color:var(--dark); letter-spacing:-.02em; margin-bottom:14px; text-wrap:balance; }
+  .lead { font-size:17px; color:var(--body); max-width:500px; margin:0 auto 26px; }
+  .btn { display:inline-block; background:var(--teal); color:#fff; font-weight:700; font-size:16px; padding:15px 28px; border-radius:100px; text-decoration:none; transition:background .15s; }
+  .btn:hover { background:var(--teal-deep); }
+  .btn-note { display:block; font-size:13px; color:var(--gray); margin-top:10px; }
+  section { padding:34px 0; border-top:1px solid var(--line); }
+  h2 { font-size:23px; font-weight:800; color:var(--dark); letter-spacing:-.01em; margin-bottom:12px; }
+  p + p { margin-top:12px; }
+  .honest { background:var(--amber-pale); border-radius:16px; padding:18px 20px; margin-top:18px; font-size:15.5px; color:var(--dark); }
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  .step b { display:block; color:var(--dark); font-size:16px; margin-bottom:2px; }
+  .step span { font-size:14px; color:var(--gray); }
+  .tiles { display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .tile { display:block; background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px 24px; text-decoration:none; position:relative; transition:transform .15s, box-shadow .15s, border-color .15s; }
+  .tile:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.08); border-color:var(--teal); }
+  .tile.dark { background:var(--dark); border-color:var(--dark); }
+  .tile.dark h3 { color:#fff; } .tile.dark p { color:#B8B6AC; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:10px; }
+  .b-teal { background:var(--teal-pale); color:var(--teal-deep); } .b-amber { background:var(--amber-pale); color:var(--amber); } .b-sky { background:#E8F0F7; color:#2C5F8A; }
+  .tile h3 { font-size:19px; font-weight:800; color:var(--dark); margin-bottom:4px; }
+  .tile p { font-size:14.5px; color:var(--gray); padding-right:28px; }
+  .tile .arrow { position:absolute; right:22px; top:50%; transform:translateY(-50%); font-size:20px; font-weight:700; color:var(--teal); }
+  .small-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .small-links a { background:#fff; border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:700; color:var(--dark); text-decoration:none; }
+  .small-links a:hover { border-color:var(--teal); color:var(--teal-deep); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  td { padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td:first-child { width:92px; font-weight:800; color:var(--teal-deep); white-space:nowrap; }
+  ul.plain { list-style:none; margin-top:12px; } ul.plain li { padding-left:22px; position:relative; margin-bottom:8px; } ul.plain li::before { content:"·"; position:absolute; left:6px; font-weight:800; color:var(--teal); }
+  .cta { text-align:center; padding:40px 0 20px; }
+  footer { text-align:center; padding:28px 0 44px; font-size:13px; color:var(--gray); border-top:1px solid var(--line); margin-top:20px; }
+  footer a { color:var(--teal); font-weight:700; text-decoration:none; }
+  @media (max-width:480px) { h1 { font-size:28px; } .steps { grid-template-columns:1fr; } }
+  .steps.six { grid-template-columns:1fr 1fr; }
+  .storylink { display:inline-block; margin-top:14px; font-weight:700; color:var(--teal); text-decoration:none; }
+  .row { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 20px; margin-top:12px; }
+  .row b { color:var(--dark); display:block; } .row span { font-size:14.5px; color:var(--gray); }
+  .pack { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px; margin-top:14px; }
+  .pack.dark { background:var(--dark); border-color:var(--dark); color:#CFCDC4; } .pack.dark h3, .pack.dark .price { color:#fff; }
+  .pack h3 { font-size:21px; font-weight:800; color:var(--dark); } .price { font-weight:800; color:var(--dark); margin:2px 0 10px; }
+  .pack .btn { margin-top:16px; }
+  .portrait { width:100%; max-height:420px; object-fit:cover; object-position:center 25%; border-radius:20px; margin:8px 0 6px; }
+  .proof { text-align:center; padding:8px 0 0; } .proof b { display:block; font-size:34px; font-weight:800; color:var(--teal-deep); }
+  .faq b { display:block; color:var(--dark); margin-top:16px; }
+  .steps .step:last-child:nth-child(odd) { grid-column:1/-1; }
+  .path { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; list-style:none; counter-reset:p; }
+  .path li { counter-increment:p; background:#fff; border:1px solid var(--line); border-radius:100px; padding:8px 14px; font-size:14.5px; font-weight:700; color:var(--dark); }
+  .path li::before { content:counter(p) " · "; color:var(--teal); }
+  .quote { border-left:3px solid var(--teal); padding:4px 0 4px 16px; margin:14px 0; font-weight:700; color:var(--dark); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="index.html">← Übersicht</a><span>Mike Buchberger</span></div>
+  <div class="hero" style="padding-bottom:26px">
+    <h1>Meine Geschichte</h1>
+    <p class="lead" style="margin-bottom:0">Ich weiß, wie es ist, wenn man gar nichts hat. Und ich weiß, wie es ist, wenn man viel hat. Gefühlt hab ich schon hundert Leben gelebt.</p>
+  </div>
+  <img class="portrait" src="photo-geschichte.jpg" alt="Mike Buchberger" style="max-height:none; max-width:340px; display:block; margin:8px auto 6px; object-position:center">
+
+  <section style="border-top:none">
+    <h2>Früh allein</h2>
+    <p>Ich bin in einfachen Verhältnissen aufgewachsen. Als ich 11 war, ist meine Mutter abgehauen. Mein Vater war nur am Arbeiten und emotional nicht da.</p>
+    <p>Ich hab früh angefangen zu kiffen und mich ins Gaming geflüchtet.</p>
+  </section>
+
+  <section>
+    <h2>Von heute auf morgen das Rich Kid</h2>
+    <p>Dann ist mein Vater auf einmal an viel Geld gekommen. Von heute auf morgen war ich das Rich Kid. Party, Hedonismus, alles ausgeben. Bis ich mich wirklich kaputt gemacht hab.</p>
+  </section>
+
+  <section>
+    <h2>„Du bist gesund, geh nach Hause.“</h2>
+    <p>2017 bin ich in der Klinik gelandet. Angst- und Panikstörung, Untergewicht: 50 Kilo bei 1,87 Meter.</p>
+    <p>Im normalen Krankenhaus haben sie mir gesagt: Du bist gesund, geh nach Hause. Die konnten mir nicht helfen.</p>
+    <p>In einer psychosomatischen Klinik hab ich dann zum ersten Mal Therapie gemacht. Antidepressiva haben mich über Wasser gehalten. Geholfen haben sie nicht.</p>
+  </section>
+
+  <section>
+    <h2>Die nächste Flucht</h2>
+    <p>Ich bin nach Sylt gezogen und war durch den Sport wieder fit. Aber ich hab weiter Status und Geld gejagt. Erst war es halb Party, halb Selbstoptimierung. Als ich die Party nicht mehr tragen konnte, wurde die Selbstoptimierung meine nächste Flucht.</p>
+    <p>Erst Hedonismus, dann Selbstoptimierung. Beides kam aus demselben Gefühl: Ich bin nicht gut genug. Ich musste mir meinen Wert verdienen, mit Leistung.</p>
+  </section>
+
+  <section>
+    <h2>Der Durchbruch</h2>
+    <p>Ich war lange sehr wissenschaftlich unterwegs, mit westlicher Medizin. Dann bin ich nach Thailand und Mexiko gereist und hab mir auch die andere Seite angeschaut.</p>
+    <p>Beim Breathwork in Mexiko kam der Durchbruch. Ich hab mich zum ersten Mal wieder mit meinen Gefühlen verbunden und wirklich nach innen geschaut.</p>
+    <p>Ich hab alles ausprobiert und mir mein eigenes Bild gemacht. Nicht alles, was die Wissenschaft sagt, stimmt. Und nicht alles Spirituelle ist Unsinn. Ich nehme das Beste aus beiden Welten. Was bei mir funktioniert hat, gebe ich weiter, und es hat schon anderen geholfen.</p>
+  </section>
+
+  <section>
+    <h2>Die Sätze, die mich gesteuert haben</h2>
+    <p>Es hat Jahre gedauert, bis ich meine Muster gefunden hab. Das waren die drei größten:</p>
+
+    <p class="quote">„Ich bin nur was wert, wenn ich außergewöhnlich bin.“</p>
+    <p>Weil meine Mutter so früh gegangen ist, hab ich mich nicht gesehen gefühlt. Also dachte ich, ich muss besonders sein. Mein Vater hat sich über Leistung definiert, also hab ich das auch getan: Ich muss viel leisten, damit ich geliebt werde.</p>
+    <p>Das ist ein ewiger Kreis. Die Messlatte verschiebt sich immer weiter, und du wirst nie gut genug sein, um diese Lücke zu füllen. Meine Sicherheit hing an einer Bedingung. Deshalb konnte sich mein Nervensystem nie sicher fühlen.</p>
+
+    <p class="quote">„Ich darf erst anfangen, wenn ich alles verstanden hab.“</p>
+    <p>Ich dachte, ich muss mich erst bereit fühlen. Dahinter steckte die Angst vor Ablehnung: Wer gar nicht erst anfängt, kann auch nicht bewertet werden.</p>
+    <p>Ich wollte immer schon der Mike aus der Zukunft sein, mit dem eigenen Gesundheitszentrum. Der Philosoph Kierkegaard nennt das die Verzweiflung der Möglichkeit: Du verlierst dich in allem, was du sein könntest, und fängst nie an. Was ich heute schon tragen konnte, war mir nie genug.</p>
+
+    <p class="quote">„Wenn es hart wird, zieh ich mich raus.“</p>
+    <p>Mein Vater hat mir das Leben so leicht wie möglich gemacht. Wenn ich für eine Klausur nicht gelernt hatte, hat er mir eine Entschuldigung geschrieben. So hab ich gelernt, mich aus allem rauszuwinden, was unangenehm war. Später hießen meine Entschuldigungen Alkohol, Drogen und Gaming.</p>
+  </section>
+
+  <section>
+    <h2>Einsam, und dann nicht mehr</h2>
+    <p>Nachdem ich mit der inneren Arbeit angefangen hab, war ich richtig lange richtig einsam. Mein alter Freundeskreis war weiter am Fliehen, mit Alkohol und Drogen. Ich mag die Jungs, aber ich konnte da nicht mehr mitgehen.</p>
+    <p>Es hat gedauert, bis ich Menschen gefunden hab, die mir guttun und denselben Weg gehen.</p>
+  </section>
+
+  <section>
+    <h2>Heute</h2>
+    <p>Erst als ich verstanden hab, dass ich jetzt schon wertvoll bin, ohne Bedingung, hat mein Nervensystem lockergelassen. Seitdem kann ich klein anfangen und das tun, was ich heute tragen kann.</p>
+    <p><b>Heute bin ich zum ersten Mal in meinem Leben glücklich. Deshalb ist es jetzt Zeit, anderen dabei zu helfen.</b></p>
+    <p>Genau diese Sätze finden wir auch bei dir.</p>
+  </section>
+
+  <div class="cta">
+    <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kostenloses Kennenlerngespräch →</a>
+    <span class="btn-note">25 Minuten per Videocall.</span>
+  </div>
+</div>
+<div class="wrap"><footer><a href="geschichte.html">Meine Geschichte</a> · <a href="termine.html">Termine</a> · <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener">Instagram</a><br><br>© 2026 Mike Buchberger<br><br><a href="impressum.html" style="color:var(--gray);font-size:12px;">Impressum</a> · <a href="datenschutz.html" style="color:var(--gray);font-size:12px;">Datenschutz</a></footer></div>
+</body>
+</html>
