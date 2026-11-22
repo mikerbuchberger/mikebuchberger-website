@@ -1,0 +1,4 @@
+[build]
+  base = "."
+  publish = "website_neu"
+  functions = "deploy_check-5/netlify/functions"
