@@ -77,6 +77,13 @@
   .shots { columns:2; column-gap:12px; margin-top:16px; }
   .shots img { width:100%; border-radius:16px; margin-bottom:12px; display:block; break-inside:avoid; box-shadow:0 6px 18px rgba(0,0,0,.10); }
   @media (max-width:480px) { .shots { columns:1; } }
+  details { background:#fff; border:1px solid var(--line); border-radius:16px; margin-top:18px; }
+  details > summary { cursor:pointer; list-style:none; padding:15px 20px; font-weight:700; color:var(--dark); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details > summary::-webkit-details-marker { display:none; }
+  details > summary::after { content:"+"; font-size:22px; font-weight:700; color:var(--teal); line-height:1; }
+  details[open] > summary::after { content:"–"; }
+  details > .inner { padding:0 20px 18px; }
+  details .way { margin-top:0; }
 </style>
 </head>
 <body>
@@ -87,7 +94,7 @@
     <h1>Du hast schon so viel über dich verstanden. Und trotzdem fühlst du dich deinen Mustern ausgeliefert.</h1>
     <p class="lead">Ich helfe dir, da rauszukommen. Damit du wieder Energie hast, Freude spürst und Ruhe im Kopf ist.</p>
     <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kostenloses Kennenlerngespräch →</a>
-    <span class="btn-note">25 Minuten per Videocall.</span>
+    <span class="btn-note">25 Minuten, kostenlos.</span>
   </div>
 
   <section>
@@ -96,13 +103,13 @@
       <a class="tile dark" href="coaching.html">
         <span class="badge b-teal">1:1 · ab 360 €</span>
         <h3>Erste Durchbrüche</h3>
-        <p>3 Sessions in 4 Wochen per Videocall, dazwischen bin ich per WhatsApp für dich da.</p>
+        <p>Wir holen dein Nervensystem raus aus dem Dauer-Alarm und machen es belastbarer. 3 Sessions in 4 Wochen, dazwischen bin ich per WhatsApp für dich da.</p>
         <span class="arrow">→</span>
       </a>
       <a class="tile" href="gruppe.html">
-        <span class="badge b-amber">Gruppe · ab Januar · 6 Plätze</span>
+        <span class="badge b-amber">Gruppe · Warteliste offen · 6 Plätze</span>
         <h3>Innere Muster</h3>
-        <p>8 Wochen online in einer kleinen Gruppe, mit holotropem Atmen zum Abschluss. Die Warteliste ist offen.</p>
+        <p>8 Wochen online in einer kleinen Gruppe. Wir lösen deine Muster, du fühlst, was du verdrängt hast, und zum Abschluss gibt es holotropes Atmen.</p>
         <span class="arrow">→</span>
       </a>
       <a class="tile" href="termine.html">
@@ -119,6 +126,21 @@
     <p>Du hast alles versucht, damit die schlechten Gefühle weggehen. Sie gehen erst, wenn du aufhörst, vor ihnen wegzulaufen.</p>
     <p>Handy, Alkohol, Kiffen, Essen, Shopping, Arbeit: Das ist alles Flucht. Solange du flüchtest, bleibst du deinen Mustern ausgeliefert.</p>
     <p>Diese Muster gehören nicht dir. Du hast sie gelernt, um dich anzupassen. Wir lösen sie auf, damit du wieder du selbst wirst und dein Nervensystem heilen kann.</p>
+    <details>
+      <summary>Der Weg in sieben Schritten</summary>
+      <div class="inner">
+        <ol class="way">
+          <li><b>Entscheiden</b><span>Du gehst diesen Weg, auch wenn er schwer wird.</span></li>
+          <li><b>Die Flucht weglassen</b><span>Kein Handy, kein Alkohol, kein Kiffen, kein Essen mehr, um dich nicht zu spüren.</span></li>
+          <li><b>Bemerken</b><span>Du merkst, wenn dein Nervensystem dich triggert, statt blind zu reagieren.</span></li>
+          <li><b>Deinen Satz finden</b><span>Du erkennst, was du tief in dir über dich glaubst.</span></li>
+          <li><b>Fühlen</b><span>Was hochkommt, drückst du nicht mehr weg.</span></li>
+          <li><b>Trotzdem handeln</b><span>Du tust das Richtige, auch wenn es sich falsch anfühlt. So lernt dein Nervensystem um.</span></li>
+          <li><b>Nicht allein</b><span>Du gehst den Weg mit Menschen, die dasselbe wollen.</span></li>
+        </ol>
+        <div class="honest"><b>Das wird unangenehm.</b> Es kommen Gefühle hoch, die du jahrelang weggedrückt hast. Genau darum geht es: Wenn du sie einmal wirklich fühlst, verlieren sie ihre Macht über dich.</div>
+      </div>
+    </details>
   </section>
 
   <section>
@@ -127,24 +149,28 @@
       <img src="stimmen/stimme-therapie.jpg" alt="Feedback" loading="lazy">
       <img src="stimmen/stimme-mama.jpg" alt="Feedback" loading="lazy">
       <img src="stimmen/stimme-lars.jpg" alt="Feedback" loading="lazy">
-      <img src="stimmen/stimme-louisa.jpg" alt="Feedback" loading="lazy">
       <img src="stimmen/stimme-beobachter.jpg" alt="Feedback" loading="lazy">
     </div>
   </section>
 
   <section>
     <h2>Ich kenne das.</h2>
-    <p>Als ich 11 war, ist meine Mutter abgehauen. 2017 lag ich mit 50 Kilo und Panikattacken in der Klinik, und die Ärzte haben gesagt: Du bist gesund, geh nach Hause.</p>
-    <p>Erst Party, dann Selbstoptimierung. Beides war Flucht. Heute bin ich zum ersten Mal in meinem Leben glücklich.</p>
+    <p>Über zehn Jahre hab ich gedacht, mit mir stimmt was nicht. Depressionen, Angst, Panikattacken, Burnout. Ich war hochsensibel und hab mich jahrelang einsam gefühlt.</p>
+    <p>Ich bin geflüchtet, wo ich nur konnte: Party, Kiffen, Status, Selbstoptimierung. Ich hab über 100 Ärzte, Therapeuten und Experten ausprobiert. Geändert hat sich erst etwas, als ich aufgehört hab wegzulaufen.</p>
+    <p>Heute ist meine Sensibilität keine Schwäche mehr, sondern meine Stärke. Und ich bin zum ersten Mal in meinem Leben glücklich.</p>
+    <p>Genau das mache ich heute mit dir: Wir finden die unsichtbaren Blockaden, die dich innerlich aufhalten. Muster, Glaubenssätze, alles, was in deinem Unterbewusstsein und deinem Nervensystem feststeckt. Wir lösen sie auf, und dein Nervensystem wird belastbarer. Dabei schaue ich aufs Ganze: Kopf, Gefühle, Körper, Sport, Ernährung, Schlaf.</p>
     <a class="storylink" href="geschichte.html">Meine ganze Geschichte →</a>
   </section>
 
 
   <section>
     <h2>Du willst erst allein starten?</h2>
+    <a href="kurs.html" style="display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #DEDBD2;border-radius:16px;padding:16px 18px;margin:14px 0 0;text-decoration:none;color:#1C1C1A;font-family:inherit;">
+  <span style="flex:1;line-height:1.45;"><b style="display:block;font-size:16px;">Nervensystem Guide · Videokurs</b><span style="font-size:14px;color:#3A3A36;">In deinem Tempo, von zu Hause. Sofort loslegen.</span></span>
+  <span style="background:#1A7A5E;color:#fff;font-weight:800;font-size:15px;padding:9px 14px;border-radius:100px;white-space:nowrap;">37 € →</span>
+</a>
     <div class="small-links">
       <a href="check.html">Nervensystem-Check · kostenlos</a>
-      <a href="kurs.html">Nervensystem Guide · Kurs · 37 €</a>
       <a href="atemreise.html">Breathwork 1:1</a>
     </div>
   </section>
