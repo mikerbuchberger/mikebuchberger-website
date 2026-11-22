@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike Buchberger – Raus aus dem Kopf. Rein ins Leben.</title>
+<meta name="description" content="Innere Muster auflösen, damit dein Nervensystem heilen kann. 1:1-Coaching, Gruppenprogramm und Termine mit Mike Buchberger.">
+<style>
+  :root { --cream:#F8F7F3; --cream-deep:#F0EEE7; --teal:#1A7A5E; --teal-deep:#14604A; --teal-pale:#E8F5F0; --amber:#9A5B14; --amber-pale:#FBF1E2; --dark:#1C1C1A; --body:#3A3A36; --gray:#84827B; --line:#DEDBD2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif; background:var(--cream); color:var(--body); line-height:1.6; }
+  .wrap { max-width:640px; margin:0 auto; padding:0 24px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:22px 0 0; font-size:14px; }
+  .topbar a { font-weight:700; color:var(--teal); text-decoration:none; }
+  .hero { text-align:center; padding:44px 0 40px; }
+  .photo { width:132px; height:132px; border-radius:50%; overflow:hidden; margin:0 auto 18px; border:4px solid #fff; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+  .photo img { width:100%; height:100%; object-fit:cover; object-position:center 28%; transform:scale(1.25); }
+  .name { font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); margin-bottom:14px; }
+  h1 { font-size:34px; line-height:1.15; font-weight:800; color:var(--dark); letter-spacing:-.02em; margin-bottom:14px; text-wrap:balance; }
+  .lead { font-size:17px; color:var(--body); max-width:500px; margin:0 auto 26px; }
+  .btn { display:inline-block; background:var(--teal); color:#fff; font-weight:700; font-size:16px; padding:15px 28px; border-radius:100px; text-decoration:none; transition:background .15s; }
+  .btn:hover { background:var(--teal-deep); }
+  .btn-note { display:block; font-size:13px; color:var(--gray); margin-top:10px; }
+  section { padding:34px 0; border-top:1px solid var(--line); }
+  h2 { font-size:23px; font-weight:800; color:var(--dark); letter-spacing:-.01em; margin-bottom:12px; }
+  p + p { margin-top:12px; }
+  .honest { background:var(--amber-pale); border-radius:16px; padding:18px 20px; margin-top:18px; font-size:15.5px; color:var(--dark); }
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  .step b { display:block; color:var(--dark); font-size:16px; margin-bottom:2px; }
+  .step span { font-size:14px; color:var(--gray); }
+  .tiles { display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .tile { display:block; background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px 24px; text-decoration:none; position:relative; transition:transform .15s, box-shadow .15s, border-color .15s; }
+  .tile:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.08); border-color:var(--teal); }
+  .tile.dark { background:var(--dark); border-color:var(--dark); }
+  .tile.dark h3 { color:#fff; } .tile.dark p { color:#B8B6AC; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:10px; }
+  .b-teal { background:var(--teal-pale); color:var(--teal-deep); } .b-amber { background:var(--amber-pale); color:var(--amber); } .b-sky { background:#E8F0F7; color:#2C5F8A; }
+  .tile h3 { font-size:19px; font-weight:800; color:var(--dark); margin-bottom:4px; }
+  .tile p { font-size:14.5px; color:var(--gray); padding-right:28px; }
+  .tile .arrow { position:absolute; right:22px; top:50%; transform:translateY(-50%); font-size:20px; font-weight:700; color:var(--teal); }
+  .small-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .small-links a { background:#fff; border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:700; color:var(--dark); text-decoration:none; }
+  .small-links a:hover { border-color:var(--teal); color:var(--teal-deep); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  td { padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td:first-child { width:92px; font-weight:800; color:var(--teal-deep); white-space:nowrap; }
+  ul.plain { list-style:none; margin-top:12px; } ul.plain li { padding-left:22px; position:relative; margin-bottom:8px; } ul.plain li::before { content:"·"; position:absolute; left:6px; font-weight:800; color:var(--teal); }
+  .cta { text-align:center; padding:40px 0 20px; }
+  footer { text-align:center; padding:28px 0 44px; font-size:13px; color:var(--gray); border-top:1px solid var(--line); margin-top:20px; }
+  footer a { color:var(--teal); font-weight:700; text-decoration:none; }
+  @media (max-width:480px) { h1 { font-size:28px; } .steps { grid-template-columns:1fr; } }
+  .steps.six { grid-template-columns:1fr 1fr; }
+  .storylink { display:inline-block; margin-top:14px; font-weight:700; color:var(--teal); text-decoration:none; }
+  .row { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 20px; margin-top:12px; }
+  .row b { color:var(--dark); display:block; } .row span { font-size:14.5px; color:var(--gray); }
+  .pack { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px; margin-top:14px; }
+  .pack.dark { background:var(--dark); border-color:var(--dark); color:#CFCDC4; } .pack.dark h3, .pack.dark .price { color:#fff; }
+  .pack h3 { font-size:21px; font-weight:800; color:var(--dark); } .price { font-weight:800; color:var(--dark); margin:2px 0 10px; }
+  .pack .btn { margin-top:16px; }
+  .portrait { width:100%; max-height:420px; object-fit:cover; object-position:center 25%; border-radius:20px; margin:8px 0 6px; }
+  .proof { text-align:center; padding:8px 0 0; } .proof b { display:block; font-size:34px; font-weight:800; color:var(--teal-deep); }
+  .faq b { display:block; color:var(--dark); margin-top:16px; }
+  .steps .step:last-child:nth-child(odd) { grid-column:1/-1; }
+  .path { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; list-style:none; counter-reset:p; }
+  .path li { counter-increment:p; background:#fff; border:1px solid var(--line); border-radius:100px; padding:8px 14px; font-size:14.5px; font-weight:700; color:var(--dark); }
+  .path li::before { content:counter(p) " · "; color:var(--teal); }
+  .quote { border-left:3px solid var(--teal); padding:4px 0 4px 16px; margin:14px 0; font-weight:700; color:var(--dark); }
+  .way { list-style:none; margin-top:14px; counter-reset:w; }
+  .way li { counter-increment:w; position:relative; padding:12px 0 12px 44px; border-bottom:1px solid var(--line); }
+  .way li:last-child { border-bottom:none; }
+  .way li::before { content:counter(w); position:absolute; left:0; top:12px; width:30px; height:30px; border-radius:50%; background:var(--teal-pale); color:var(--teal-deep); font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  .way b { display:block; color:var(--dark); }
+  .way span { font-size:15px; color:var(--body); }
+  .shots { columns:2; column-gap:12px; margin-top:16px; }
+  .shots img { width:100%; border-radius:16px; margin-bottom:12px; display:block; break-inside:avoid; box-shadow:0 6px 18px rgba(0,0,0,.10); }
+  @media (max-width:480px) { .shots { columns:1; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="photo"><img src="photo-mike-neu.jpg" alt="Mike Buchberger" style="transform:none; object-position:center"></div>
+    <div class="name">Mike Buchberger</div>
+    <h1>Du hast schon so viel über dich verstanden. Und trotzdem fühlst du dich deinen Mustern ausgeliefert.</h1>
+    <p class="lead">Ich helfe dir, da rauszukommen. Damit du wieder Energie hast, Freude spürst und Ruhe im Kopf ist.</p>
+    <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kostenloses Kennenlerngespräch →</a>
+    <span class="btn-note">25 Minuten per Videocall.</span>
+  </div>
+
+  <section>
+    <h2>Drei Wege, mit mir zu arbeiten</h2>
+    <div class="tiles">
+      <a class="tile dark" href="coaching.html">
+        <span class="badge b-teal">1:1 · ab 360 €</span>
+        <h3>Erste Durchbrüche</h3>
+        <p>3 Sessions in 4 Wochen per Videocall, dazwischen bin ich per WhatsApp für dich da.</p>
+        <span class="arrow">→</span>
+      </a>
+      <a class="tile" href="gruppe.html">
+        <span class="badge b-amber">Gruppe · ab Januar · 6 Plätze</span>
+        <h3>Innere Muster</h3>
+        <p>8 Wochen online in einer kleinen Gruppe, mit holotropem Atmen zum Abschluss. Die Warteliste ist offen.</p>
+        <span class="arrow">→</span>
+      </a>
+      <a class="tile" href="termine.html">
+        <span class="badge b-sky">Online &amp; Frankfurt</span>
+        <h3>Termine</h3>
+        <p>Breathwork und Release &amp; Let Go, online und live.</p>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Du läufst weg. Deshalb ändert sich nichts.</h2>
+    <p>Du hast alles versucht, damit die schlechten Gefühle weggehen. Sie gehen erst, wenn du aufhörst, vor ihnen wegzulaufen.</p>
+    <p>Handy, Alkohol, Kiffen, Essen, Shopping, Arbeit: Das ist alles Flucht. Solange du flüchtest, bleibst du deinen Mustern ausgeliefert.</p>
+    <p>Diese Muster gehören nicht dir. Du hast sie gelernt, um dich anzupassen. Wir lösen sie auf, damit du wieder du selbst wirst und dein Nervensystem heilen kann.</p>
+  </section>
+
+  <section>
+    <h2>Stimmen</h2>
+    <div class="shots">
+      <img src="stimmen/stimme-therapie.jpg" alt="Feedback" loading="lazy">
+      <img src="stimmen/stimme-mama.jpg" alt="Feedback" loading="lazy">
+      <img src="stimmen/stimme-lars.jpg" alt="Feedback" loading="lazy">
+      <img src="stimmen/stimme-louisa.jpg" alt="Feedback" loading="lazy">
+      <img src="stimmen/stimme-beobachter.jpg" alt="Feedback" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <h2>Ich kenne das.</h2>
+    <p>Als ich 11 war, ist meine Mutter abgehauen. 2017 lag ich mit 50 Kilo und Panikattacken in der Klinik, und die Ärzte haben gesagt: Du bist gesund, geh nach Hause.</p>
+    <p>Erst Party, dann Selbstoptimierung. Beides war Flucht. Heute bin ich zum ersten Mal in meinem Leben glücklich.</p>
+    <a class="storylink" href="geschichte.html">Meine ganze Geschichte →</a>
+  </section>
+
+
+  <section>
+    <h2>Du willst erst allein starten?</h2>
+    <div class="small-links">
+      <a href="check.html">Nervensystem-Check · kostenlos</a>
+      <a href="kurs.html">Nervensystem Guide · Kurs · 37 €</a>
+      <a href="atemreise.html">Breathwork 1:1</a>
+    </div>
+  </section>
+</div>
+<div class="wrap"><footer><a href="geschichte.html">Meine Geschichte</a> · <a href="termine.html">Termine</a> · <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener">Instagram</a><br><br>© 2026 Mike Buchberger<br><br><a href="impressum.html" style="color:var(--gray);font-size:12px;">Impressum</a> · <a href="datenschutz.html" style="color:var(--gray);font-size:12px;">Datenschutz</a></footer></div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1:1 Begleitung – Mike Buchberger</title>
+<meta name="description" content="1:1-Coaching: innere Muster auflösen, damit dein Nervensystem heilen kann. Einstieg mit drei Sessions für 360 €.">
+<style>
+  :root { --cream:#F8F7F3; --cream-deep:#F0EEE7; --teal:#1A7A5E; --teal-deep:#14604A; --teal-pale:#E8F5F0; --amber:#9A5B14; --amber-pale:#FBF1E2; --dark:#1C1C1A; --body:#3A3A36; --gray:#84827B; --line:#DEDBD2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif; background:var(--cream); color:var(--body); line-height:1.6; }
+  .wrap { max-width:640px; margin:0 auto; padding:0 24px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:22px 0 0; font-size:14px; }
+  .topbar a { font-weight:700; color:var(--teal); text-decoration:none; }
+  .hero { text-align:center; padding:44px 0 40px; }
+  .photo { width:132px; height:132px; border-radius:50%; overflow:hidden; margin:0 auto 18px; border:4px solid #fff; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+  .photo img { width:100%; height:100%; object-fit:cover; object-position:center 28%; transform:scale(1.25); }
+  .name { font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); margin-bottom:14px; }
+  h1 { font-size:34px; line-height:1.15; font-weight:800; color:var(--dark); letter-spacing:-.02em; margin-bottom:14px; text-wrap:balance; }
+  .lead { font-size:17px; color:var(--body); max-width:500px; margin:0 auto 26px; }
+  .btn { display:inline-block; background:var(--teal); color:#fff; font-weight:700; font-size:16px; padding:15px 28px; border-radius:100px; text-decoration:none; transition:background .15s; }
+  .btn:hover { background:var(--teal-deep); }
+  .btn-note { display:block; font-size:13px; color:var(--gray); margin-top:10px; }
+  section { padding:34px 0; border-top:1px solid var(--line); }
+  h2 { font-size:23px; font-weight:800; color:var(--dark); letter-spacing:-.01em; margin-bottom:12px; }
+  p + p { margin-top:12px; }
+  .honest { background:var(--amber-pale); border-radius:16px; padding:18px 20px; margin-top:18px; font-size:15.5px; color:var(--dark); }
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  .step b { display:block; color:var(--dark); font-size:16px; margin-bottom:2px; }
+  .step span { font-size:14px; color:var(--gray); }
+  .tiles { display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .tile { display:block; background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px 24px; text-decoration:none; position:relative; transition:transform .15s, box-shadow .15s, border-color .15s; }
+  .tile:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.08); border-color:var(--teal); }
+  .tile.dark { background:var(--dark); border-color:var(--dark); }
+  .tile.dark h3 { color:#fff; } .tile.dark p { color:#B8B6AC; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:10px; }
+  .b-teal { background:var(--teal-pale); color:var(--teal-deep); } .b-amber { background:var(--amber-pale); color:var(--amber); } .b-sky { background:#E8F0F7; color:#2C5F8A; }
+  .tile h3 { font-size:19px; font-weight:800; color:var(--dark); margin-bottom:4px; }
+  .tile p { font-size:14.5px; color:var(--gray); padding-right:28px; }
+  .tile .arrow { position:absolute; right:22px; top:50%; transform:translateY(-50%); font-size:20px; font-weight:700; color:var(--teal); }
+  .small-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .small-links a { background:#fff; border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:700; color:var(--dark); text-decoration:none; }
+  .small-links a:hover { border-color:var(--teal); color:var(--teal-deep); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  td { padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td:first-child { width:92px; font-weight:800; color:var(--teal-deep); white-space:nowrap; }
+  ul.plain { list-style:none; margin-top:12px; } ul.plain li { padding-left:22px; position:relative; margin-bottom:8px; } ul.plain li::before { content:"·"; position:absolute; left:6px; font-weight:800; color:var(--teal); }
+  .cta { text-align:center; padding:40px 0 20px; }
+  footer { text-align:center; padding:28px 0 44px; font-size:13px; color:var(--gray); border-top:1px solid var(--line); margin-top:20px; }
+  footer a { color:var(--teal); font-weight:700; text-decoration:none; }
+  @media (max-width:480px) { h1 { font-size:28px; } .steps { grid-template-columns:1fr; } }
+  .steps.six { grid-template-columns:1fr 1fr; }
+  .storylink { display:inline-block; margin-top:14px; font-weight:700; color:var(--teal); text-decoration:none; }
+  .row { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 20px; margin-top:12px; }
+  .row b { color:var(--dark); display:block; } .row span { font-size:14.5px; color:var(--gray); }
+  .pack { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px; margin-top:14px; }
+  .pack.dark { background:var(--dark); border-color:var(--dark); color:#CFCDC4; } .pack.dark h3, .pack.dark .price { color:#fff; }
+  .pack h3 { font-size:21px; font-weight:800; color:var(--dark); } .price { font-weight:800; color:var(--dark); margin:2px 0 10px; }
+  .pack .btn { margin-top:16px; }
+  .portrait { width:100%; max-height:420px; object-fit:cover; object-position:center 25%; border-radius:20px; margin:8px 0 6px; }
+  .proof { text-align:center; padding:8px 0 0; } .proof b { display:block; font-size:34px; font-weight:800; color:var(--teal-deep); }
+  .faq b { display:block; color:var(--dark); margin-top:16px; }
+  .steps .step:last-child:nth-child(odd) { grid-column:1/-1; }
+  .path { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; list-style:none; counter-reset:p; }
+  .path li { counter-increment:p; background:#fff; border:1px solid var(--line); border-radius:100px; padding:8px 14px; font-size:14.5px; font-weight:700; color:var(--dark); }
+  .path li::before { content:counter(p) " · "; color:var(--teal); }
+  .quote { border-left:3px solid var(--teal); padding:4px 0 4px 16px; margin:14px 0; font-weight:700; color:var(--dark); }
+  details { background:#fff; border:1px solid var(--line); border-radius:16px; margin-top:12px; }
+  details > summary { cursor:pointer; list-style:none; padding:15px 20px; font-weight:700; color:var(--dark); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  details > summary::-webkit-details-marker { display:none; }
+  details > summary::after { content:"+"; font-size:22px; font-weight:700; color:var(--teal); line-height:1; }
+  details[open] > summary::after { content:"–"; }
+  details > .inner { padding:0 20px 18px; }
+  details .steps { margin-top:4px; } details .step { background:var(--cream); }
+  .pack details { background:transparent; border-color:var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="index.html">← Übersicht</a><span>Mike Buchberger</span></div>
+  <div class="hero">
+    <span class="badge b-teal">1:1 Begleitung</span>
+    <h1>Du musst da nicht alleine durch.</h1>
+    <p class="lead">Du verstehst deine Muster und bist ihnen trotzdem ausgeliefert. Im 1:1 gehen wir da gemeinsam durch: über den Körper, über deine Gefühle und über das, was du jeden Tag tust.</p>
+    <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kostenloses Kennenlerngespräch →</a>
+    <span class="btn-note">25 Minuten per Videocall.</span>
+  </div>
+
+  <section>
+    <h2>Kennst du das?</h2>
+    <ul class="plain">
+      <li>Abends doch wieder Handy, Wein oder Kühlschrank. Dabei hattest du dir fest vorgenommen, dass es heute anders läuft.</li>
+      <li>Als hättest du das Steuer nicht mehr selbst in der Hand. Irgendwas in dir entscheidet, und du schaust zu.</li>
+      <li>Bücher, Podcasts, Therapie. Und trotzdem sitzt du in denselben Mustern fest.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Das Problem ist die Flucht.</h2>
+    <p>Handy, Alkohol, Kiffen, Essen, Shopping, Arbeit, Selbstoptimierung. Alles, was dir sofort ein gutes Gefühl gibt, hält dich von dem fern, was du eigentlich fühlen musst.</p>
+    <p>Deine schlechten Gefühle gehen erst weg, wenn du aufhörst, vor ihnen wegzulaufen. Wir lösen deine inneren Muster auf, damit dein Nervensystem heilen kann.</p>
+    <div class="honest"><b>Das wird unangenehm.</b> Es kommen Gefühle hoch, die du jahrelang weggedrückt hast. Genau darum geht es: Wenn du sie einmal wirklich fühlst, verlieren sie ihre Macht über dich.</div>
+  </section>
+
+  <section id="angebot">
+    <h2>Zwei Wege, mit mir zu arbeiten</h2>
+    <p>Ich begleite nur wenige Menschen gleichzeitig.</p>
+    <div class="pack dark">
+      <span class="badge b-teal">Einstieg · in sich abgeschlossen</span>
+      <h3>Erste Durchbrüche</h3>
+      <div class="price">360 € · 3 Sessions in 4 Wochen</div>
+      <ul class="plain">
+        <li>Du weißt, was bei dir los ist und warum.</li>
+        <li>Du findest deinen Satz: die unbewusste Regel, wann du dich okay fühlst und wann nicht.</li>
+        <li>Du hast 2–3 Werkzeuge, die bei dir funktionieren. Gemeinsam getestet, nicht aus einem Buch.</li>
+        <li>Zwischen den Sessions bin ich per WhatsApp für dich da.</li>
+      </ul>
+      <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kennenlerngespräch buchen →</a>
+    </div>
+    <div class="pack">
+      <span class="badge b-amber">Hauptprogramm · 12 Sessions</span>
+      <h3>Flexibles Nervensystem</h3>
+      <div class="price">1.400 € · 3 Phasen</div>
+      <p>Die vollständige Begleitung. „Erste Durchbrüche“ wird voll angerechnet.</p>
+      <details>
+        <summary>Die drei Phasen</summary>
+        <div class="inner"><ul class="plain">
+          <li><b>Phase 1, dein erster Durchbruch:</b> Wir schauen uns an, was bei dir los ist, und dein Körper bekommt wieder das Gefühl: Ich bin sicher.</li>
+          <li><b>Phase 2, tiefer rein:</b> Wir gehen an die Situationen, die dich bisher überfordert haben. So sammelst du Beweis für Beweis: Ich schaffe das.</li>
+          <li><b>Phase 3, dein neues Normal:</b> Frühwarnzeichen, Plan für schwere Tage, Routinen. Am Ende regulierst du dich selbst.</li>
+        </ul></div>
+      </details>
+      <a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kennenlerngespräch buchen →</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Wenn du es genauer wissen willst</h2>
+    <details>
+      <summary>Der Weg in sieben Schritten</summary>
+      <div class="inner">
+    <div class="steps six">
+      <div class="step"><b>1 · Entscheiden</b><span>Du gehst diesen Weg, auch wenn er schwer wird.</span></div>
+      <div class="step"><b>2 · Die Flucht weglassen</b><span>Handy, Alkohol, Kiffen, Essen, Shopping.</span></div>
+      <div class="step"><b>3 · Bemerken</b><span>„Das ist gerade nur mein Nervensystem, das mich triggert.“</span></div>
+      <div class="step"><b>4 · Deinen Satz finden</b><span>Was glaubst du tief in dir über dich? Wenn du das erkennst, macht es klick.</span></div>
+      <div class="step"><b>5 · Fühlen</b><span>Was hochkommt, drückst du nicht mehr weg.</span></div>
+      <div class="step"><b>6 · Trotzdem handeln</b><span>So lernt dein Nervensystem um.</span></div>
+      <div class="step"><b>7 · Nicht allein</b><span>Mit Menschen, die denselben Weg gehen.</span></div>
+    </div>
+        <p style="margin-top:16px"><b>Bei mir war es so:</b> Meine Mutter ist früh gegangen, und ich hab mich nicht gesehen gefühlt. Daraus wurde der Satz: Ich bin nur was wert, wenn ich außergewöhnlich bin. Diese Messlatte verschiebt sich immer weiter.</p>
+        <p>Erst als ich verstanden hab, dass ich jetzt schon wertvoll bin, hat mein Nervensystem lockergelassen. Genau so einen Satz finden wir bei dir. <a class="storylink" style="margin-top:0" href="geschichte.html">Meine Geschichte →</a></p>
+      </div>
+    </details>
+    <details>
+      <summary>Womit wir arbeiten</summary>
+      <div class="inner">
+        <p>Ich schaue auf das ganze System, nicht auf ein einzelnes Symptom.</p>
+        <ul class="plain">
+          <li><b>Kopf:</b> Glaubenssätze, Schattenarbeit nach C. G. Jung, Innere-Kind-Arbeit</li>
+          <li><b>Gefühle:</b> Atmung und somatische Arbeit</li>
+          <li><b>Körper:</b> Haltung, Faszien, Bewegung, Ernährung, Schlaf</li>
+          <li><b>Leben:</b> Routinen, Umfeld, Beziehungen, Sinn</li>
+        </ul>
+        <p style="margin-top:10px">Dein Körper lernt nicht durch Nachdenken. Solange er nicht erlebt, dass du sicher bist, ändert sich nichts.</p>
+      </div>
+    </details>
+    <details>
+      <summary>Ist das wie Therapie?</summary>
+      <div class="inner"><p>Nein. Wir arbeiten über den Körper und über dein Handeln im Alltag. Akute Traumata, schwere psychische Erkrankungen und Krisen gehören in therapeutische Hände.</p></div>
+    </details>
+    <details>
+      <summary>Arbeitest du auch mit Süchten?</summary>
+      <div class="inner"><p>Kiffen, Handy, Gaming, Essen aus Frust: Das sind Versuche, ein überfordertes System zu beruhigen. Genau damit arbeite ich, weil ich selbst jahrelang drinsteckte. Körperliche Abhängigkeiten wie Alkohol brauchen medizinische Begleitung.</p></div>
+    </details>
+    <details>
+      <summary>Wie viel Zeit muss ich einplanen?</summary>
+      <div class="inner"><p>Eine Session dauert 60 Minuten, alle ein bis zwei Wochen. Die eigentliche Arbeit passiert in deinem Alltag.</p></div>
+    </details>
+  </section>
+
+  <section id="gespraech" style="text-align:center">
+    <h2>25 Minuten. Ehrlich, ob es passt.</h2>
+    <p>Du erzählst mir, wo du stehst, und ich sage dir ehrlich, ob ich dir helfen kann. Wenn es nicht passt, sage ich dir das genauso.</p>
+    <p style="margin-top:18px"><a class="btn" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener">Kennenlerngespräch buchen →</a></p>
+    <div class="proof" style="margin-top:30px"><b>1.500+</b>Menschen profitieren bereits von meinen kostenlosen Inhalten</div>
+    <p style="font-size:13px; color:var(--gray); margin-top:10px">Zertifizierter Holosomatic Breathwork® Facilitator · Level 1 + 2 · InnerCamp</p>
+  </section>
+</div>
+<div class="wrap"><footer><a href="geschichte.html">Meine Geschichte</a> · <a href="termine.html">Termine</a> · <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener">Instagram</a><br><br>© 2026 Mike Buchberger<br><br><a href="impressum.html" style="color:var(--gray);font-size:12px;">Impressum</a> · <a href="datenschutz.html" style="color:var(--gray);font-size:12px;">Datenschutz</a></footer></div>
+</body>
+</html>
