@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workbook: 7 Tage raus aus dem Muster | Mike Buchberger</title>
+<meta name="description" content="Kostenloses Workbook: sieben Tage, jeden Tag zehn Minuten, um dein Muster zu erwischen, während es passiert.">
+<style>
+  :root { --cream:#F8F7F3; --cream-deep:#F0EEE7; --teal:#1A7A5E; --teal-deep:#14604A; --teal-pale:#E8F5F0; --amber:#9A5B14; --amber-pale:#FBF1E2; --dark:#1C1C1A; --body:#3A3A36; --gray:#84827B; --line:#DEDBD2; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif; background:var(--cream); color:var(--body); line-height:1.6; }
+  .wrap { max-width:640px; margin:0 auto; padding:0 24px; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; padding:22px 0 0; font-size:14px; }
+  .topbar a { font-weight:700; color:var(--teal); text-decoration:none; }
+  .hero { text-align:center; padding:44px 0 40px; }
+  .photo { width:132px; height:132px; border-radius:50%; overflow:hidden; margin:0 auto 18px; border:4px solid #fff; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+  .photo img { width:100%; height:100%; object-fit:cover; object-position:center 28%; transform:scale(1.25); }
+  .name { font-size:14px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); margin-bottom:14px; }
+  h1 { font-size:34px; line-height:1.15; font-weight:800; color:var(--dark); letter-spacing:-.02em; margin-bottom:14px; text-wrap:balance; }
+  .lead { font-size:17px; color:var(--body); max-width:500px; margin:0 auto 26px; }
+  .btn { display:inline-block; background:var(--teal); color:#fff; font-weight:700; font-size:16px; padding:15px 28px; border-radius:100px; text-decoration:none; transition:background .15s; }
+  .btn:hover { background:var(--teal-deep); }
+  .btn-note { display:block; font-size:13px; color:var(--gray); margin-top:10px; }
+  section { padding:34px 0; border-top:1px solid var(--line); }
+  h2 { font-size:23px; font-weight:800; color:var(--dark); letter-spacing:-.01em; margin-bottom:12px; }
+  p + p { margin-top:12px; }
+  .honest { background:var(--amber-pale); border-radius:16px; padding:18px 20px; margin-top:18px; font-size:15.5px; color:var(--dark); }
+  .steps { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .step { background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  .step b { display:block; color:var(--dark); font-size:16px; margin-bottom:2px; }
+  .step span { font-size:14px; color:var(--gray); }
+  .tiles { display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+  .tile { display:block; background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px 24px; text-decoration:none; position:relative; transition:transform .15s, box-shadow .15s, border-color .15s; }
+  .tile:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.08); border-color:var(--teal); }
+  .tile.dark { background:var(--dark); border-color:var(--dark); }
+  .tile.dark h3 { color:#fff; } .tile.dark p { color:#B8B6AC; }
+  .badge { display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:5px 12px; border-radius:100px; margin-bottom:10px; }
+  .b-teal { background:var(--teal-pale); color:var(--teal-deep); } .b-amber { background:var(--amber-pale); color:var(--amber); } .b-sky { background:#E8F0F7; color:#2C5F8A; }
+  .tile h3 { font-size:19px; font-weight:800; color:var(--dark); margin-bottom:4px; }
+  .tile p { font-size:14.5px; color:var(--gray); padding-right:28px; }
+  .tile .arrow { position:absolute; right:22px; top:50%; transform:translateY(-50%); font-size:20px; font-weight:700; color:var(--teal); }
+  .small-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .small-links a { background:#fff; border:1px solid var(--line); border-radius:100px; padding:9px 16px; font-size:14px; font-weight:700; color:var(--dark); text-decoration:none; }
+  .small-links a:hover { border-color:var(--teal); color:var(--teal-deep); }
+  table { width:100%; border-collapse:collapse; margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; }
+  td { padding:12px 16px; border-bottom:1px solid var(--line); font-size:15px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td:first-child { width:92px; font-weight:800; color:var(--teal-deep); white-space:nowrap; }
+  ul.plain { list-style:none; margin-top:12px; } ul.plain li { padding-left:22px; position:relative; margin-bottom:8px; } ul.plain li::before { content:"·"; position:absolute; left:6px; font-weight:800; color:var(--teal); }
+  .cta { text-align:center; padding:40px 0 20px; }
+  footer { text-align:center; padding:28px 0 44px; font-size:13px; color:var(--gray); border-top:1px solid var(--line); margin-top:20px; }
+  footer a { color:var(--teal); font-weight:700; text-decoration:none; }
+  @media (max-width:480px) { h1 { font-size:28px; } .steps { grid-template-columns:1fr; } }
+  form { background:#fff; border:1px solid var(--line); border-radius:20px; padding:22px; margin-top:18px; text-align:left; }
+  label { display:block; font-size:14px; font-weight:700; color:var(--dark); margin:12px 0 6px; }
+  input, textarea { width:100%; font:inherit; font-size:16px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--cream); }
+  textarea { min-height:90px; resize:vertical; }
+  form .btn { border:none; cursor:pointer; width:100%; margin-top:18px; }
+  .price { font-size:15px; } .price s { color:var(--gray); }
+  .shots { columns:2; column-gap:12px; margin-top:16px; }
+  .shots img { width:100%; border-radius:16px; margin-bottom:12px; display:block; break-inside:avoid; box-shadow:0 6px 18px rgba(0,0,0,.10); }
+  @media (max-width:480px) { .shots { columns:1; } }
+
+  .storylink { display:inline-block; margin-top:12px; font-weight:700; color:var(--teal); text-decoration:none; }
+  .mhero { text-align:center; padding:40px 0 10px; }
+  .mphoto { width:112px; height:112px; border-radius:50%; overflow:hidden; margin:0 auto 18px; border:4px solid #fff; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+  .mphoto img { width:100%; height:100%; object-fit:cover; }
+  .two { display:flex; flex-direction:column; gap:10px; margin:22px auto 0; max-width:360px; }
+  .two a { text-align:center; }
+  .btn.alt { background:var(--dark); }
+  .mcard { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 22px; margin-top:28px; }
+  .mcard ul { margin:12px 0 0 18px; } .mcard li { margin:4px 0; }
+  .shots { columns:2; column-gap:12px; margin-top:16px; }
+  .shots img { width:100%; border-radius:16px; margin-bottom:12px; display:block; break-inside:avoid; box-shadow:0 6px 18px rgba(0,0,0,.10); }
+  @media (max-width:480px) { .shots { columns:1; } }
+</style>
+<style>
+  .inside { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .inside div { background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; font-size:14.5px; }
+  .inside b { display:block; color:var(--teal-deep); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
+  .signup { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px 22px; margin-top:26px; text-align:center; }
+  .signup input[type=email] { width:100%; font:inherit; font-size:16px; padding:14px 16px; border:1px solid var(--line); border-radius:100px; background:var(--cream); text-align:center; }
+  .signup .btn { border:none; cursor:pointer; width:100%; margin-top:12px; }
+  .signup .fine { font-size:12.5px; color:var(--gray); margin-top:12px; line-height:1.5; }
+  .signup .fine a { color:var(--gray); }
+  .err { color:#B23B2B; font-size:14px; margin-top:10px; display:none; }
+  #done { display:none; }
+  .check { width:58px; height:58px; border-radius:50%; background:var(--teal-pale); color:var(--teal); font-size:30px; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
+  @media (max-width:480px) { .inside { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mhero">
+    <div class="mphoto"><img src="photo-mike-neu.jpg" alt="Mike Buchberger" style="object-position:center"></div>
+    <div class="name">Mike Buchberger</div>
+    <h1>7 Tage raus aus dem Muster</h1>
+    <p class="lead">Dein kostenloses Workbook. Sieben Tage, jeden Tag zehn Minuten, um dein Muster zu erwischen, während es passiert.</p>
+  </div>
+
+  <div id="form-view">
+    <div class="signup">
+      <form id="wb" novalidate>
+        <input type="email" id="email" name="fields[email]" placeholder="Deine E-Mail-Adresse" autocomplete="email" required>
+        <p style="display:none"><input name="website" tabindex="-1" autocomplete="off"></p>
+        <button class="btn" type="submit" id="sendbtn">Workbook holen →</button>
+        <p class="err" id="err">Das hat nicht geklappt. Prüf kurz deine Adresse oder versuch es gleich noch mal.</p>
+        <p class="fine">Du bekommst das Workbook per Mail und ab und zu Post von mir. Abmelden geht mit einem Klick. <a href="datenschutz.html">Datenschutz</a></p>
+      </form>
+    </div>
+
+    <section style="border-top:none; padding-top:30px">
+      <h2>Was dich erwartet</h2>
+      <p>Du hast schon so viel über dich verstanden. Und trotzdem läuft das alte Muster weiter. Das liegt nicht an zu wenig Wissen. Ein Muster ist eine trainierte Reaktion, und die verändert sich nur durch Üben. Genau damit fängt das Workbook an: mit dem ersten Schritt, dem Bemerken.</p>
+      <div class="inside">
+        <div><b>Tag 1 bis 2</b>Deine Fluchten und was sie auslöst</div>
+        <div><b>Tag 3</b>Spüren statt flüchten</div>
+        <div><b>Tag 4 bis 5</b>Der Satz hinter deinem Muster</div>
+        <div><b>Tag 6 bis 7</b>Bewusst anders handeln, Rückblick</div>
+      </div>
+    </section>
+  </div>
+
+  <div id="done">
+    <div class="signup">
+      <div class="check">✓</div>
+      <h2>Ist unterwegs!</h2>
+      <p>Schau in dein Postfach. Bist du neu hier, bestätige kurz deine Adresse, dann kommt das Workbook sofort. Nichts da? Einmal im Spam oder unter Werbung nachsehen.</p>
+    </div>
+    <section style="border-top:none">
+      <h2>Schau dich gern um</h2>
+      <div class="tiles">
+        <a class="tile dark" href="gruppe.html"><span class="badge b-amber">Gruppe · Warteliste offen</span><h3>Innere Muster</h3><p>8 Wochen online in einer kleinen Gruppe. Wir gehen den ganzen Weg gemeinsam.</p><span class="arrow">→</span></a>
+        <a class="tile" href="https://calendly.com/buchbergermike/kennenlern-gesprach" target="_blank" rel="noopener"><span class="badge b-teal">25 Minuten · kostenlos</span><h3>Kennenlerngespräch</h3><p>Du erzählst, wo du stehst. Ich sag dir ehrlich, was dir hilft.</p><span class="arrow">→</span></a>
+        <a class="tile" href="geschichte.html"><span class="badge b-sky">Über mich</span><h3>Meine Geschichte</h3><p>Zehn Jahre Angst, Panik und Flucht. Und was sich verändert hat.</p><span class="arrow">→</span></a>
+      </div>
+      <div class="small-links"><a href="index.html">Startseite</a><a href="termine.html">Termine</a><a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener">Instagram</a></div>
+    </section>
+  </div>
+</div>
+<div class="wrap"><footer><a href="index.html">Startseite</a> · <a href="geschichte.html">Meine Geschichte</a> · <a href="https://www.instagram.com/mikebuchberger" target="_blank" rel="noopener">Instagram</a><br><br>© 2026 Mike Buchberger<br><br><a href="impressum.html" style="color:var(--gray);font-size:12px;">Impressum</a> · <a href="datenschutz.html" style="color:var(--gray);font-size:12px;">Datenschutz</a></footer></div>
+<script>
+document.getElementById('wb').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var em = document.getElementById('email').value.trim(), err = document.getElementById('err'), b = document.getElementById('sendbtn');
+  err.style.display = 'none';
+  if (this.website.value) return;
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { err.style.display = 'block'; return; }
+  b.disabled = true; b.textContent = 'Einen Moment …';
+  try {
+    var fd = new FormData(); fd.append('fields[email]', em); fd.append('ml-submit', '1'); fd.append('anticsrf', 'true');
+    var r = await fetch('https://assets.mailerlite.com/jsonp/2503465/forms/205311930389235614/subscribe', { method: 'POST', body: fd });
+    var j = await r.json().catch(function(){ return {}; });
+    if (!r.ok || j.success === false) throw new Error('fail');
+    document.getElementById('form-view').style.display = 'none';
+    document.getElementById('done').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (x) {
+    err.style.display = 'block'; b.disabled = false; b.textContent = 'Workbook holen →';
+  }
+});
+</script>
+</body>
+</html>
